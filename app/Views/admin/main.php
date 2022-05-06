@@ -93,10 +93,16 @@
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        Alina Mclourd
+                                        <?php echo session()->get('userNama'); ?>
                                     </div>
                                     <div class="widget-subheading">
-                                        VP People Manager
+                                        <?php 
+                                            if (session()->get('userRole') == 0) {
+                                                echo 'Super Admin';
+                                            } else  {
+                                                echo 'Admin';
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">

@@ -7,7 +7,7 @@
         <ul class="vertical-nav-menu">
             <li class="app-sidebar__heading"></li>
             <li>
-                <a href="index.html" class="mm-active">
+                <a href="<?= base_url('/admin'); ?>" class="mm-active">
                     <i class="metismenu-icon pe-7s-rocket"></i>
                     Dashboard 
                 </a>
