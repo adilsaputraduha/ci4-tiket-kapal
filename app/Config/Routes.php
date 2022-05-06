@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 // Admin
-$routes->get('/admin', 'AdminHome::index');
+$routes->get('/admin', 'AdminHome::index', ['filter' => 'auth']);
 // Admin Login
 $routes->get('/admin/login', 'AdminLoginController::index');
 $routes->post('/admin/login/ceklogin', 'AdminLoginController::ceklogin');

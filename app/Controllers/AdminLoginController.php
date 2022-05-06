@@ -23,19 +23,20 @@ class AdminLoginController extends BaseController
         $user = $model->cekLogin($email);
 
         if ($user) {
-            if (password_verify($password, $user['userPassword'])) {
+            // if (password_verify($password, $user['userPassword'])) {
+            if ($password == $user['userPassword']) {
                 session()->set('userId', $user['userId']);
                 session()->set('userNama', $user['userNama']);
                 session()->set('userEmail', $user['userEmail']);
-                session()->set('userLevel', $user['userLevel']);
-                return redirect()->to('/home');
+                session()->set('userRole', $user['userRole']);
+                return redirect()->to('/admin');
             } else {
                 session()->setFlashdata('message', 'Password salah');
-                return redirect()->to('/login');
+                return redirect()->to('/admin/login');
             }
         } else {
             session()->setFlashdata('message', 'Email belum terdaftar');
-            return redirect()->to('/login');
+            return redirect()->to('/admin/login');
         }
     }
 
@@ -44,8 +45,8 @@ class AdminLoginController extends BaseController
         session()->remove('userId');
         session()->remove('userNama');
         session()->remove('userEmail');
-        session()->remove('userLevel');
+        session()->remove('userRole');
         session()->setFlashdata('success', 'Berhasil keluar');
-        return redirect()->to('/login');
+        return redirect()->to('/admin/login');
     }
 }
