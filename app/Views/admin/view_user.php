@@ -298,24 +298,21 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                        <i class="pe-7s-user icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Analytics Dashboard
-                        <div class="page-title-subheading">This is an example dashboard created using build-in elements and components.
+                    <div>Data User
+                        <div class="page-title-subheading">This is a page for managing user data.
                         </div>
                     </div>
                 </div>
                 <div class="page-title-actions">
-                    <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
-                        <i class="fa fa-star"></i>
-                    </button>
                     <div class="d-inline-block dropdown">
                         <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
                             <span class="btn-icon-wrapper pr-2 opacity-7">
-                                <i class="fa fa-business-time fa-w-20"></i>
+                                <i class="fa fa-info fa-w-20"></i>
                             </span>
-                            Buttons
+                            Info
                         </button>
                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                             <ul class="nav flex-column">
@@ -323,34 +320,36 @@
                                     <a href="javascript:void(0);" class="nav-link">
                                         <i class="nav-link-icon lnr-inbox"></i>
                                         <span>
-                                            Inbox
+                                            Tambah
                                         </span>
-                                        <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                        <div class="ml-auto badge badge-pill badge-info"> </div>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:void(0);" class="nav-link">
                                         <i class="nav-link-icon lnr-book"></i>
                                         <span>
-                                            Book
+                                            Edit
                                         </span>
-                                        <div class="ml-auto badge badge-pill badge-danger">5</div>
+                                        <div class="ml-auto badge badge-pill badge-primary"> </div>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="javascript:void(0);" class="nav-link">
                                         <i class="nav-link-icon lnr-picture"></i>
                                         <span>
-                                            Picture
+                                            Hapus
                                         </span>
+                                        <div class="ml-auto badge badge-pill badge-danger"> </div>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a disabled href="javascript:void(0);" class="nav-link disabled">
-                                        <i class="nav-link-icon lnr-file-empty"></i>
+                                    <a href="javascript:void(0);" class="nav-link">
+                                        <i class="nav-link-icon lnr-book"></i>
                                         <span>
-                                            File Disabled
+                                            Report
                                         </span>
+                                        <div class="ml-auto badge badge-pill badge-success"> </div>
                                     </a>
                                 </li>
                             </ul>
@@ -362,25 +361,53 @@
         <div class="card">  
             <div class="app-main__inner">
                 <div class="box-body">
-                    <a href="home.php?p=formtambahbarang" class="btn btn-primary btn-lg col-md-2">
-                        <span class="pe-7s-plus" aria-hidden="true"></span> TAMBAH DATA
+                    <a href="home.php?p=formtambahbarang" class="btn btn-outline-info btn-lg col-md-2 mb-2">
+                        <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
+                            <i class="fa fa-plus fa-w-20"></i>
+                        </span>
+                        Tambah
+                    </a>
+                    <a href="home.php?p=formtambahbarang" class="btn btn-outline-success btn-lg col-md-2 mb-2">
+                        <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
+                            <i class="fa fa-print fa-w-20"></i>
+                        </span>
+                        Laporan
                     </a>
                     <br><br>
                     <div class="container">
-                        <table id="databarang" name="databarang" class="table table-striped table-simple data">
+                        <table id="datatable" name="datatable" class="table table-simple datatable">
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Barang</th>
-                                <th>Nama Barang</th>
-                                <th>Satuan</th>
-                                <th>Harga Barang</th>
-                                <th>Stok Barang</th>
+                                <th>Email</th>
+                                <th>Nama</th>
+                                <th>Role</th>
                                 <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
-                                
+                                <?php $no = 0;
+                                foreach ($user as $row) : $no++ ?>
+                                    <tr>
+                                        <td> <?= $no; ?></td>
+                                        <td> <?= $row['userEmail']; ?></td>
+                                        <td> <?= $row['userNama']; ?></td>
+                                        <td>
+                                            <?php if ($row['userRole'] == 1) { ?>
+                                                <span class="badge bg-primary text-light">Admin</span>
+                                            <?php } else if ($row['userRole'] == 0) { ?>
+                                                <span class="badge bg-info text-light">Super Admin</span>
+                                            <?php } ?>
+                                        <td style="text-align: center;">
+                                            <a href="<?= base_url(); ?>/user/update/<?= $row['userId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['userId']; ?>">
+                                                <i class="fa fa-ban"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                         <br>

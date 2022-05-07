@@ -11,6 +11,9 @@
     <meta name="description" content="This is an example dashboard created using build-in elements and components.">
     <meta name="msapplication-tap-highlight" content="no">
 <link href="<?= base_url(); ?>/assets/main.css" rel="stylesheet">
+<!-- DataTable -->
+<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets/assets/media/css/jquery.dataTables.css">
+
 </head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -152,5 +155,19 @@
                 <?= $this->rendersection('content'); ?>
         </div>
     </div>
-<script type="text/javascript" src="<?= base_url(); ?>/assets/assets/scripts/main.js"></script></body>
+    <script type="text/javascript" src="<?= base_url(); ?>/assets/assets/scripts/main.js"></script>
+    
+    <script type="text/javascript" src="<?= base_url(); ?>/assets/assets/media/js/jquerys.js"></script>
+    <script type="text/javascript" src="<?= base_url(); ?>/assets/assets/media/js/jquerys.dataTables.js"></script>
+
+    <script>
+        $(function() {
+            $("#datatable").DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
+        });
+    </script>
+    
+</body>
 </html>
