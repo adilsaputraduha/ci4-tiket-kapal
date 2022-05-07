@@ -21,9 +21,9 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="elements-buttons-standard.html">
+                        <a href="<?= base_url('/admin/user'); ?>">
                             <i class="metismenu-icon"></i>
-                            Buttons
+                            User
                         </a>
                     </li>
                     <li>
