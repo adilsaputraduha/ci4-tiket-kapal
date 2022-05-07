@@ -9,7 +9,10 @@ class AdminUserController extends BaseController
     public function index()
     {
         $model = new AdminUser();
-        $data['user'] = $model->getUser()->getResultArray();
+        $data = [
+            'user' => $model->getUser()->getResultArray(),
+            'validation' => \Config\Services::validation()
+        ];
         echo view('/admin/view_user', $data);
     }
 

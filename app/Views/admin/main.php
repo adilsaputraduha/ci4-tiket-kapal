@@ -168,6 +168,8 @@
             });
         });
     </script>
-    
+
+    <?= $this->rendersection('modal'); ?>
+
 </body>
 </html>
