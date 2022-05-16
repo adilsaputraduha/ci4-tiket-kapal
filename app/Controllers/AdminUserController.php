@@ -16,12 +16,6 @@ class AdminUserController extends BaseController
         echo view('/admin/view_user', $data);
     }
 
-    public function tambah()
-    {
-        $data['validation'] = \Config\Services::validation();
-        echo view('view_tambah_user', $data);
-    }
-
     public function save()
     {
         $rules = [
@@ -62,16 +56,16 @@ class AdminUserController extends BaseController
                 'userEmail' => $this->request->getPost('email'),
                 'userNama' => $this->request->getPost('nama'),
                 'userPassword' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'userLevel' => $this->request->getPost('level'),
+                'userRole' => $this->request->getPost('level'),
                 'userUpdatedAt' => date('Y-m-d H:i:s'),
                 'userCreatedAt' => date('Y-m-d H:i:s')
             );
             $model->saveUser($data);
             session()->setFlashdata('success', 'Berhasil menyimpan data');
-            return redirect()->to('/user');
+            return redirect()->to('/admin/user');
         } else {
             $validation = \Config\Services::validation();
-            return redirect()->to('/user/tambah')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/user')->withInput()->with('validation', $validation);
         }
     }
 

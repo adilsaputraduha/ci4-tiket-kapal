@@ -9,7 +9,7 @@
             <li>
                 <a href="<?= base_url('/admin'); ?>">
                     <i class="metismenu-icon pe-7s-rocket"></i>
-                    Dashboard 
+                    Dashboard
                 </a>
             </li>
             <li class="app-sidebar__heading">Administrator</li>
@@ -355,10 +355,10 @@
                             </ul>
                         </div>
                     </div>
-                </div>   
+                </div>
             </div>
         </div>
-        <div class="card">  
+        <div class="card">
             <div class="app-main__inner">
                 <div class="box-body">
                     <button data-toggle="modal" data-target="#addModal" class="btn btn-outline-info btn-lg col-md-2 mb-2">
@@ -377,13 +377,13 @@
                     <div class="container">
                         <table id="datatable" name="datatable" class="table table-simple datatable">
                             <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Email</th>
-                                <th>Nama</th>
-                                <th>Role</th>
-                                <th>Aksi</th>
-                            </tr>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Email</th>
+                                    <th>Nama</th>
+                                    <th>Role</th>
+                                    <th>Aksi</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 0;
@@ -432,7 +432,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('user/save'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('admin/user/save'); ?>" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="card-body">
                         <div class="row">

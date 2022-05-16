@@ -41,7 +41,6 @@ $routes->post('/admin/login/ceklogin', 'AdminLoginController::ceklogin');
 $routes->get('/admin/logout', 'AdminLoginController::logout', ['filter' => 'auth']);
 // User
 $routes->get('/admin/user', 'AdminUserController::index', ['filter' => 'auth']);
-$routes->get('/admin/user/tambah', 'AdminUserController::tambah', ['filter' => 'auth']);
 $routes->post('/admin/user/save', 'AdminUserController::save', ['filter' => 'auth']);
 $routes->get('/admin/user/update/(:segment)', 'AdminUserController::update/$1', ['filter' => 'auth']);
 $routes->post('/admin/user/edit', 'AdminUserController::edit', ['filter' => 'auth']);
