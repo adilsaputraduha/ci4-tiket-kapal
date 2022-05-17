@@ -64,6 +64,7 @@ class AdminUserController extends BaseController
             session()->setFlashdata('success', 'Berhasil menyimpan data');
             return redirect()->to('/admin/user');
         } else {
+            session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
             return redirect()->to('/admin/user')->withInput()->with('validation', $validation);
         }
@@ -109,6 +110,7 @@ class AdminUserController extends BaseController
             session()->setFlashdata('success', 'Berhasil edit data');
             return redirect()->to('/admin/user');
         } else {
+            session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
             return redirect()->to('/admin/user')->withInput()->with('validation', $validation);
         }
