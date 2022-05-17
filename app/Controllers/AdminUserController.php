@@ -103,25 +103,15 @@ class AdminUserController extends BaseController
                 'userEmail' => $this->request->getPost('email'),
                 'userNama' => $this->request->getPost('nama'),
                 'userPassword' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'userLevel' => $this->request->getPost('level')
+                'userRole' => $this->request->getPost('level')
             );
             $model->updateUser($data, $id);
             session()->setFlashdata('success', 'Berhasil menyimpan data');
-            return redirect()->to('/user');
+            return redirect()->to('/admin/user');
         } else {
             $validation = \Config\Services::validation();
-            return redirect()->to('/user/update/' . $id)->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/user')->withInput()->with('validation', $validation);
         }
-    }
-
-    public function update($id)
-    {
-        $model = new AdminUser();
-        $data = [
-            'user' => $model->getUserDetail($id)->getResultArray(),
-            'validation' => \Config\Services::validation()
-        ];
-        echo view('view_edit_user', $data);
     }
 
     public function delete()
