@@ -11,22 +11,17 @@ class AdminPenumpang extends Model
         $bulder = $this->db->table('tb_penumpang');
         return $bulder->get();
     }
-    public function getUserDetail($id)
-    {
-        $bulder = $this->db->table('tb_penumpang')->where('penumpangId', $id);
-        return $bulder->get();
-    }
-    public function saveUser($data)
+    public function saveData($data)
     {
         $query = $this->db->table('tb_penumpang')->insert($data);
         return $query;
     }
-    public function updateUser($data, $id)
+    public function updateData($data, $id)
     {
         $query = $this->db->table('tb_penumpang')->update($data, array('penumpangId' => $id));
         return $query;
     }
-    public function deleteUser($id)
+    public function deleteData($id)
     {
         $query = $this->db->table('tb_penumpang')->delete(array('penumpangId' => $id));
         return $query;

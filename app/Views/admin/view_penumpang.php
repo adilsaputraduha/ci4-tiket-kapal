@@ -394,8 +394,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Email</th>
                                     <th>Nama</th>
+                                    <th>Alamat</th>
                                     <th>Role</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -405,8 +405,8 @@
                                 foreach ($penumpang as $row) : $no++ ?>
                                     <tr>
                                         <td> <?= $no; ?></td>
-                                        <td> <?= $row['userEmail']; ?></td>
-                                        <td> <?= $row['userNama']; ?></td>
+                                        <td> <?= $row['penumpangNama']; ?></td>
+                                        <td> <?= $row['penumpangAlamat']; ?></td>
                                         <td>
                                             <?php if ($row['userRole'] == 1) { ?>
                                                 <span class="badge bg-primary text-light">Admin</span>
