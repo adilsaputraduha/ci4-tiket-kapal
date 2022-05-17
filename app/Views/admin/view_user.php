@@ -359,6 +359,21 @@
             </div>
         </div>
         <div class="card">
+            <?php if (session()->getFlashdata('success')) { ?>
+                <div class="alert alert-success icons-alert m-2">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?php echo session()->getFlashdata('success'); ?>
+                </div>
+            <?php } else if (session()->getFlashdata('failed')) { ?>
+                <div class="alert alert-danger icons-alert m-2">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?php echo session()->getFlashdata('failed'); ?>
+                </div>
+            <?php } ?>
             <div class="app-main__inner">
                 <div class="box-body">
                     <button data-toggle="modal" data-target="#addModal" class="btn btn-outline-info btn-lg col-md-2 mb-2">
