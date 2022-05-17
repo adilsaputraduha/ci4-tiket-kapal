@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class AdminPenumpang extends Model
 {
-    public function getUser()
+    public function getData()
     {
         $bulder = $this->db->table('tb_penumpang');
         return $bulder->get();

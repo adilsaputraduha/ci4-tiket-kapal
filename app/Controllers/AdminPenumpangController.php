@@ -2,15 +2,15 @@
 
 namespace App\Controllers;
 
-use App\Models\AdminUser;
+use App\Models\AdminPenumpang;
 
 class AdminPenumpangController extends BaseController
 {
     public function index()
     {
-        $model = new AdminUser();
+        $model = new AdminPenumpang();
         $data = [
-            'user' => $model->getUser()->getResultArray(),
+            'penumpang' => $model->getData()->getResultArray(),
             'validation' => \Config\Services::validation()
         ];
         echo view('/admin/view_penumpang', $data);
@@ -51,7 +51,7 @@ class AdminPenumpangController extends BaseController
         ];
 
         if ($this->validate($rules)) {
-            $model = new AdminUser();
+            $model = new AdminPenumpang();
             $data = array(
                 'userEmail' => $this->request->getPost('email'),
                 'userNama' => $this->request->getPost('nama'),
@@ -99,7 +99,7 @@ class AdminPenumpangController extends BaseController
         $id = $this->request->getPost('id');
 
         if ($this->validate($rules)) {
-            $model = new AdminUser();
+            $model = new AdminPenumpang();
             $data = array(
                 'userEmail' => $this->request->getPost('email'),
                 'userNama' => $this->request->getPost('nama'),
@@ -118,7 +118,7 @@ class AdminPenumpangController extends BaseController
 
     public function delete()
     {
-        $model = new AdminUser();
+        $model = new AdminPenumpang();
         $id = $this->request->getPost('id');
         $model->deleteUser($id);
         session()->setFlashdata('success', 'Berhasil menghapus data');
@@ -127,7 +127,7 @@ class AdminPenumpangController extends BaseController
 
     public function laporan()
     {
-        $model = new AdminUser();
+        $model = new AdminPenumpang();
         $data['user'] = $model->getUser()->getResultArray();
         echo view('/admin/report_user', $data);
     }

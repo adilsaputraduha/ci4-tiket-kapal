@@ -301,8 +301,8 @@
                         <i class="pe-7s-user icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Data User
-                        <div class="page-title-subheading">This is a page for managing user data.
+                    <div>Data Penumpang
+                        <div class="page-title-subheading">This is a page for managing passenger data.
                         </div>
                     </div>
                 </div>
@@ -402,7 +402,7 @@
                             </thead>
                             <tbody>
                                 <?php $no = 0;
-                                foreach ($user as $row) : $no++ ?>
+                                foreach ($penumpang as $row) : $no++ ?>
                                     <tr>
                                         <td> <?= $no; ?></td>
                                         <td> <?= $row['userEmail']; ?></td>
@@ -507,7 +507,7 @@
 </div>
 
 
-<?php foreach ($user as $row) : ?>
+<?php foreach ($penumpang as $row) : ?>
     <form action="<?= base_url('admin/user/edit'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
         <div class="modal fade" id="editModal<?= $row['userId']; ?>" tabindex="-1" role="dialog">
