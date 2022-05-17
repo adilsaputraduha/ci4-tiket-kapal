@@ -21,13 +21,13 @@
                 </a>
                 <ul class="mm-show">
                     <li>
-                        <a href="<?= base_url('/admin/user'); ?>" class="mm-active">
+                        <a href="<?= base_url('/admin/user'); ?>">
                             <i class="metismenu-icon"></i>
                             User
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('/admin/penumpang'); ?>">
+                        <a href="<?= base_url('/admin/penumpang'); ?>" class="mm-active">
                             <i class="metismenu-icon">
                             </i>Penumpang
                         </a>

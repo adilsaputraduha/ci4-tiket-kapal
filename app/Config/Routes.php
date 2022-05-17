@@ -45,6 +45,12 @@ $routes->post('/admin/user/save', 'AdminUserController::save', ['filter' => 'aut
 $routes->post('/admin/user/edit', 'AdminUserController::edit', ['filter' => 'auth']);
 $routes->post('/admin/user/delete', 'AdminUserController::delete', ['filter' => 'auth']);
 $routes->get('/admin/user/laporan', 'AdminUserController::laporan', ['filter' => 'auth']);
+// Penumpang
+$routes->get('/admin/penumpang', 'AdminPenumpangController::index', ['filter' => 'auth']);
+$routes->post('/admin/penumpang/save', 'AdminPenumpangController::save', ['filter' => 'auth']);
+$routes->post('/admin/penumpang/edit', 'AdminPenumpangController::edit', ['filter' => 'auth']);
+$routes->post('/admin/penumpang/delete', 'AdminPenumpangController::delete', ['filter' => 'auth']);
+$routes->get('/admin/penumpang/laporan', 'AdminPenumpangController::laporan', ['filter' => 'auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing
