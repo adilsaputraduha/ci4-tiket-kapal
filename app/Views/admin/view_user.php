@@ -399,7 +399,7 @@
                                                 <span class="badge bg-info text-light">Super Admin</span>
                                             <?php } ?>
                                         <td style="text-align: center;">
-                                            <a href="<?= base_url(); ?>/user/update/<?= $row['userId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
+                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['userId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['userId']; ?>">
@@ -490,5 +490,102 @@
         </div>
     </div>
 </div>
+
+
+<?php foreach ($user as $row) : ?>
+    <form action="<?= base_url('admin/user/edit'); ?>" enctype="multipart/form-data" method="POST">
+        <?= csrf_field(); ?>
+        <div class="modal fade" id="editModal<?= $row['userId']; ?>" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Form Edit User</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <input type="hidden" name="id" id="id" value="<?= $row['userId']; ?>">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" readonly class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= $row['userEmail']; ?>" required placeholder="Masukan email">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('email'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Nama</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= $row['userNama']; ?>" required placeholder="Masukan nama">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('nama'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" readonly class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" id="password" name="password" value="<?= $row['userPassword']; ?>" required placeholder="Masukan password">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('password'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Level</label>
+                                    <select name="level" id="level" required class="form-control <?= ($validation->hasError('level')) ? 'is-invalid' : ''; ?>">
+                                        <?php if ($row['userRole'] == 1) { ?>
+                                            <option selected value="1">Admin</option>
+                                            <option value="0">Super Admin</option>
+                                        <?php } else if ($row['userRole'] == 0) { ?>
+                                            <option selected value="0">Super Admin</option>
+                                            <option value="1">Admin</option>
+                                        <?php } ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('level'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary mt-2 mb-2" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary mt-2 mb-2 mr-2">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form action="<?= base_url('admin/user/delete'); ?>" enctype="multipart/form-data" method="POST">
+        <?= csrf_field(); ?>
+        <div class="modal" tabindex="-1" id="deleteModal<?= $row['userId']; ?>">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hapus User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" required value="<?= $row['userId']; ?>" />
+                        <h6>Yakin ingin menghapus data ini?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-primary mt-2 mb-2 mr-2">Yakin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<?php endforeach; ?>
 
 <?= $this->endSection(); ?>

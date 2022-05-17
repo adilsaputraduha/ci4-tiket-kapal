@@ -23,8 +23,7 @@ class AdminLoginController extends BaseController
         $user = $model->cekLogin($email);
 
         if ($user) {
-            // if (password_verify($password, $user['userPassword'])) {
-            if ($password == $user['userPassword']) {
+            if (password_verify($password, $user['userPassword'])) {
                 session()->set('userId', $user['userId']);
                 session()->set('userNama', $user['userNama']);
                 session()->set('userEmail', $user['userEmail']);

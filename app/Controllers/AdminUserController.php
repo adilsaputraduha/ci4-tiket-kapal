@@ -130,7 +130,7 @@ class AdminUserController extends BaseController
         $id = $this->request->getPost('id');
         $model->deleteUser($id);
         session()->setFlashdata('success', 'Berhasil menghapus data');
-        return redirect()->to('/user');
+        return redirect()->to('/admin/user');
     }
 
     public function laporan()
