@@ -382,7 +382,7 @@
                         </span>
                         Tambah
                     </button>
-                    <a href="home.php?p=formtambahbarang" class="btn btn-outline-success btn-lg col-md-2 mb-2">
+                    <a href="<?= base_url('/admin/user/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
                         <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
                             <i class="fa fa-print fa-w-20"></i>
                         </span>

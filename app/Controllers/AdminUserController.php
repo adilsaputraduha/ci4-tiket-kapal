@@ -106,7 +106,7 @@ class AdminUserController extends BaseController
                 'userRole' => $this->request->getPost('level')
             );
             $model->updateUser($data, $id);
-            session()->setFlashdata('success', 'Berhasil menyimpan data');
+            session()->setFlashdata('success', 'Berhasil edit data');
             return redirect()->to('/admin/user');
         } else {
             $validation = \Config\Services::validation();
@@ -127,6 +127,6 @@ class AdminUserController extends BaseController
     {
         $model = new AdminUser();
         $data['user'] = $model->getUser()->getResultArray();
-        echo view('laporan/laporan_user', $data);
+        echo view('/admin/report_user', $data);
     }
 }
