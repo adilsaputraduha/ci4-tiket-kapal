@@ -301,8 +301,8 @@
                         <i class="pe-7s-user icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Data Kategori
-                        <div class="page-title-subheading">This is a page for managing category data.
+                    <div>Data Rute
+                        <div class="page-title-subheading">This is a page for managing route data.
                         </div>
                     </div>
                 </div>
@@ -382,7 +382,7 @@
                         </span>
                         Tambah
                     </button>
-                    <a href="<?= base_url('/admin/kategori/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
+                    <a href="<?= base_url('/admin/rute/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
                         <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
                             <i class="fa fa-print fa-w-20"></i>
                         </span>
@@ -394,23 +394,23 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Fasilitas</th>
+                                    <th>Asal</th>
+                                    <th>Tujuan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 0;
-                                foreach ($kategori as $row) : $no++ ?>
+                                foreach ($rute as $row) : $no++ ?>
                                     <tr>
                                         <td> <?= $no; ?></td>
-                                        <td> <?= $row['kategoriNama']; ?></td>
-                                        <td> <?= $row['kategoriFasilitas']; ?></td>
+                                        <td> <?= $row['ruteAsal']; ?></td>
+                                        <td> <?= $row['ruteTujuan']; ?></td>
                                         <td style="text-align: center;">
-                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['kategoriId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
+                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['ruteId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['kategoriId']; ?>">
+                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['ruteId']; ?>">
                                                 <i class="fa fa-ban"></i>
                                             </a>
                                         </td>
@@ -434,22 +434,22 @@
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="">Form Tambah Kategori</h6>
+                <h6 class="modal-title" id="">Form Tambah Rute</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('admin/kategori/save'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('admin/rute/save'); ?>" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= old('nama'); ?>" required placeholder="Masukan nama">
+                                    <label>Asal</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('asal')) ? 'is-invalid' : ''; ?>" id="asal" name="asal" value="<?= old('asal'); ?>" required placeholder="Masukan asal">
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('nama'); ?>
+                                        <?= $validation->getError('asal'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -457,10 +457,10 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Fasilitas</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('fasilitas')) ? 'is-invalid' : ''; ?>" id="fasilitas" name="fasilitas" required placeholder="Masukan fasilitas">
+                                    <label>Tujuan</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?>" id="tujuan" name="tujuan" required placeholder="Masukan tujuan">
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('fasilitas'); ?>
+                                        <?= $validation->getError('tujuan'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -479,27 +479,27 @@
 </div>
 
 
-<?php foreach ($kategori as $row) : ?>
-    <form action="<?= base_url('admin/kategori/edit'); ?>" enctype="multipart/form-data" method="POST">
+<?php foreach ($rute as $row) : ?>
+    <form action="<?= base_url('admin/rute/edit'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
-        <div class="modal fade" id="editModal<?= $row['kategoriId']; ?>" tabindex="-1" role="dialog">
+        <div class="modal fade" id="editModal<?= $row['ruteId']; ?>" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title">Form Edit Kategori</h6>
+                        <h6 class="modal-title">Form Edit Rute</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <input type="hidden" name="id" id="id" value="<?= $row['kategoriId']; ?>">
+                            <input type="hidden" name="id" id="id" value="<?= $row['ruteId']; ?>">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= $row['kategoriNama']; ?>" required placeholder="Masukan nama">
+                                    <label>Asal</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('asal')) ? 'is-invalid' : ''; ?>" id="asal" name="asal" value="<?= $row['ruteAsal']; ?>" required placeholder="Masukan asal">
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('nama'); ?>
+                                        <?= $validation->getError('asal'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -507,10 +507,10 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Fasilitas</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('fasilitas')) ? 'is-invalid' : ''; ?>" id="fasilitas" name="fasilitas" value="<?= $row['kategoriFasilitas']; ?>" required placeholder="Masukan fasilitas">
+                                    <label>Tujuan</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('tujuan')) ? 'is-invalid' : ''; ?>" id="tujuan" name="tujuan" value="<?= $row['ruteTujuan']; ?>" required placeholder="Masukan tujuan">
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('fasilitas'); ?>
+                                        <?= $validation->getError('tujuan'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -524,19 +524,19 @@
             </div>
         </div>
     </form>
-    <form action="<?= base_url('admin/kategori/delete'); ?>" enctype="multipart/form-data" method="POST">
+    <form action="<?= base_url('admin/rute/delete'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
-        <div class="modal" tabindex="-1" id="deleteModal<?= $row['kategoriId']; ?>">
+        <div class="modal" tabindex="-1" id="deleteModal<?= $row['ruteId']; ?>">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Hapus Kategori</h5>
+                        <h5 class="modal-title">Hapus Rute</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="id" required value="<?= $row['kategoriId']; ?>" />
+                        <input type="hidden" name="id" required value="<?= $row['ruteId']; ?>" />
                         <h6>Yakin ingin menghapus data ini?</h6>
                     </div>
                     <div class="modal-footer">
