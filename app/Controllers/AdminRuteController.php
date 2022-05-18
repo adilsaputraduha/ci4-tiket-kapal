@@ -19,18 +19,18 @@ class AdminRuteController extends BaseController
     public function save()
     {
         $rules = [
-            'nama' => [
-                'rules' => 'required|max_length[100]',
-                'errors' => [
-                    'required' => 'Nama harus diisi',
-                    'max_length' => 'Kolom nama tidak boleh lebih dari 20 karakter'
-                ]
-            ],
-            'fasilitas' => [
+            'asal' => [
                 'rules' => 'required|max_length[255]',
                 'errors' => [
-                    'required' => 'Fasilitas harus diisi',
-                    'max_length' => 'Kolom fasilitas tidak boleh lebih dari 255 karakter'
+                    'required' => 'Asal harus diisi',
+                    'max_length' => 'Kolom asal tidak boleh lebih dari 20 karakter'
+                ]
+            ],
+            'tujuan' => [
+                'rules' => 'required|max_length[255]',
+                'errors' => [
+                    'required' => 'Tujuan harus diisi',
+                    'max_length' => 'Kolom tujuan tidak boleh lebih dari 255 karakter'
                 ]
             ]
         ];
@@ -38,36 +38,36 @@ class AdminRuteController extends BaseController
         if ($this->validate($rules)) {
             $model = new AdminRute();
             $data = array(
-                'kategoriNama' => $this->request->getPost('nama'),
-                'kategoriFasilitas' => $this->request->getPost('fasilitas'),
-                'kategoriUpdatedAt' => date('Y-m-d H:i:s'),
-                'kategoriCreatedAt' => date('Y-m-d H:i:s')
+                'ruteAsal' => $this->request->getPost('asal'),
+                'ruteTujuan' => $this->request->getPost('tujuan'),
+                'ruteUpdatedAt' => date('Y-m-d H:i:s'),
+                'ruteCreatedAt' => date('Y-m-d H:i:s')
             );
             $model->saveData($data);
             session()->setFlashdata('success', 'Berhasil menyimpan data');
-            return redirect()->to('/admin/kategori');
+            return redirect()->to('/admin/rute');
         } else {
             session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
-            return redirect()->to('/admin/kategori')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/rute')->withInput()->with('validation', $validation);
         }
     }
 
     public function edit()
     {
         $rules = [
-            'nama' => [
-                'rules' => 'required|max_length[100]',
-                'errors' => [
-                    'required' => 'Nama harus diisi',
-                    'max_length' => 'Kolom nama tidak boleh lebih dari 20 karakter'
-                ]
-            ],
-            'fasilitas' => [
+            'asal' => [
                 'rules' => 'required|max_length[255]',
                 'errors' => [
-                    'required' => 'Fasilitas harus diisi',
-                    'max_length' => 'Kolom fasilitas tidak boleh lebih dari 255 karakter'
+                    'required' => 'Asal harus diisi',
+                    'max_length' => 'Kolom asal tidak boleh lebih dari 20 karakter'
+                ]
+            ],
+            'tujuan' => [
+                'rules' => 'required|max_length[255]',
+                'errors' => [
+                    'required' => 'Tujuan harus diisi',
+                    'max_length' => 'Kolom tujuan tidak boleh lebih dari 255 karakter'
                 ]
             ]
         ];
@@ -77,17 +77,17 @@ class AdminRuteController extends BaseController
         if ($this->validate($rules)) {
             $model = new AdminRute();
             $data = array(
-                'kategoriNama' => $this->request->getPost('nama'),
-                'kategoriFasilitas' => $this->request->getPost('fasilitas'),
-                'kategoriUpdatedAt' => date('Y-m-d H:i:s'),
+                'ruteAsal' => $this->request->getPost('asal'),
+                'ruteTujuan' => $this->request->getPost('tujuan'),
+                'ruteUpdatedAt' => date('Y-m-d H:i:s'),
             );
             $model->updateData($data, $id);
             session()->setFlashdata('success', 'Berhasil edit data');
-            return redirect()->to('/admin/kategori');
+            return redirect()->to('/admin/rute');
         } else {
             session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
-            return redirect()->to('/admin/kategori')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/rute')->withInput()->with('validation', $validation);
         }
     }
 
@@ -97,13 +97,13 @@ class AdminRuteController extends BaseController
         $id = $this->request->getPost('id');
         $model->deleteData($id);
         session()->setFlashdata('success', 'Berhasil menghapus data');
-        return redirect()->to('/admin/kategori');
+        return redirect()->to('/admin/rute');
     }
 
     public function laporan()
     {
         $model = new AdminRute();
-        $data['kategori'] = $model->getData()->getResultArray();
-        echo view('/admin/report_kategori', $data);
+        $data['rute'] = $model->getData()->getResultArray();
+        echo view('/admin/report_rute', $data);
     }
 }
