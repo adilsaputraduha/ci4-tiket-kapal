@@ -396,7 +396,8 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Alamat</th>
-                                    <th>Role</th>
+                                    <th>No. Hp</th>
+                                    <th>Jenkel</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -407,17 +408,19 @@
                                         <td> <?= $no; ?></td>
                                         <td> <?= $row['penumpangNama']; ?></td>
                                         <td> <?= $row['penumpangAlamat']; ?></td>
+                                        <td> <?= $row['penumpangNoHp']; ?></td>
                                         <td>
-                                            <?php if ($row['userRole'] == 1) { ?>
-                                                <span class="badge bg-primary text-light">Admin</span>
-                                            <?php } else if ($row['userRole'] == 0) { ?>
-                                                <span class="badge bg-info text-light">Super Admin</span>
+                                            <?php if ($row['penumpangJenkel'] == 1) { ?>
+                                                <span class="badge bg-primary text-light">Laki-Laki</span>
+                                            <?php } else if ($row['penumpangJenkel'] == 0) { ?>
+                                                <span class="badge bg-info text-light">Perempuan</span>
                                             <?php } ?>
+                                        </td>
                                         <td style="text-align: center;">
-                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['userId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
+                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['penumpangId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['userId']; ?>">
+                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['penumpangId']; ?>">
                                                 <i class="fa fa-ban"></i>
                                             </a>
                                         </td>
@@ -441,13 +444,13 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="">Form Tambah User</h6>
+                <h6 class="modal-title" id="">Form Tambah Penumpang</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('admin/user/save'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('admin/penumpang/save'); ?>" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="card-body">
                         <div class="row">
@@ -508,35 +511,46 @@
 
 
 <?php foreach ($penumpang as $row) : ?>
-    <form action="<?= base_url('admin/user/edit'); ?>" enctype="multipart/form-data" method="POST">
+    <form action="<?= base_url('admin/penumpang/edit'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
-        <div class="modal fade" id="editModal<?= $row['userId']; ?>" tabindex="-1" role="dialog">
+        <div class="modal fade" id="editModal<?= $row['penumpangId']; ?>" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title">Form Edit User</h6>
+                        <h6 class="modal-title">Form Edit Penumpang</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <input type="hidden" name="id" id="id" value="<?= $row['userId']; ?>">
+                            <input type="hidden" name="id" id="id" value="<?= $row['penumpangId']; ?>">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" readonly class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= $row['userEmail']; ?>" required placeholder="Masukan email">
+                                    <label>Nama</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= $row['penumpangNama']; ?>" required placeholder="Masukan nama">
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('email'); ?>
+                                        <?= $validation->getError('nama'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= $row['userNama']; ?>" required placeholder="Masukan nama">
+                                    <label>No. Hp</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('nohp')) ? 'is-invalid' : ''; ?>" id="nohp" name="nohp" value="<?= $row['penumpangNoHp']; ?>" required placeholder="Masukan nomor hp">
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('nama'); ?>
+                                        <?= $validation->getError('nohp'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Alamat</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('alamat')) ? 'is-invalid' : ''; ?>" id="alamat" name="alamat" value="<?= $row['penumpangAlamat']; ?>" required placeholder="Masukan alamat">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('alamat'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -544,27 +558,18 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" readonly class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" id="password" name="password" value="<?= $row['userPassword']; ?>" required placeholder="Masukan password">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('password'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Level</label>
-                                    <select name="level" id="level" required class="form-control <?= ($validation->hasError('level')) ? 'is-invalid' : ''; ?>">
-                                        <?php if ($row['userRole'] == 1) { ?>
-                                            <option selected value="1">Admin</option>
-                                            <option value="0">Super Admin</option>
-                                        <?php } else if ($row['userRole'] == 0) { ?>
-                                            <option selected value="0">Super Admin</option>
-                                            <option value="1">Admin</option>
+                                    <label>Jenis Kelamin</label>
+                                    <select name="jenkel" id="jenkel" required class="form-control <?= ($validation->hasError('jenkel')) ? 'is-invalid' : ''; ?>">
+                                        <?php if ($row['penumpangJenkel'] == 1) { ?>
+                                            <option selected value="1">Laki-Laki</option>
+                                            <option value="0">Perempuan</option>
+                                        <?php } else if ($row['penumpangJenkel'] == 0) { ?>
+                                            <option selected value="0">Perempuan</option>
+                                            <option value="1">Laki-Laki</option>
                                         <?php } ?>
                                     </select>
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('level'); ?>
+                                        <?= $validation->getError('jenkel'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -578,19 +583,19 @@
             </div>
         </div>
     </form>
-    <form action="<?= base_url('admin/user/delete'); ?>" enctype="multipart/form-data" method="POST">
+    <form action="<?= base_url('admin/penumpang/delete'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
-        <div class="modal" tabindex="-1" id="deleteModal<?= $row['userId']; ?>">
+        <div class="modal" tabindex="-1" id="deleteModal<?= $row['penumpangId']; ?>">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Hapus User</h5>
+                        <h5 class="modal-title">Hapus Penumpang</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="id" required value="<?= $row['userId']; ?>" />
+                        <input type="hidden" name="id" required value="<?= $row['penumpangId']; ?>" />
                         <h6>Yakin ingin menghapus data ini?</h6>
                     </div>
                     <div class="modal-footer">

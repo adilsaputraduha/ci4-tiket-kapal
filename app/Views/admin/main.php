@@ -167,8 +167,8 @@
     <script>
         $(function() {
             $("#datatable").DataTable({
-                "responsive": true,
-                "autoWidth": false,
+                responsive: true,
+                autoWidth: false,
             });
         });
     </script>
