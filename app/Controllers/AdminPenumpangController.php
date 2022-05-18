@@ -19,33 +19,32 @@ class AdminPenumpangController extends BaseController
     public function save()
     {
         $rules = [
-            'email' => [
-                'rules' => 'required|max_length[100]|is_unique[tb_user.userEmail]',
-                'errors' => [
-                    'is_unique' => 'Email sudah ada',
-                    'required' => 'Email harus diisi',
-                    'max_length' => 'Kolom email tidak boleh lebih dari 20 karakter'
-                ]
-            ],
             'nama' => [
                 'rules' => 'required|max_length[100]',
                 'errors' => [
                     'required' => 'Nama harus diisi',
-                    'max_length' => 'Kolom nama tidak boleh lebih dari 100 karakter'
+                    'max_length' => 'Kolom nama tidak boleh lebih dari 20 karakter'
                 ]
             ],
-            'password' => [
-                'rules' => 'required|min_length[4]|max_length[100]',
+            'alamat' => [
+                'rules' => 'required|max_length[100]',
                 'errors' => [
-                    'required' => 'Password harus diisi',
-                    'max_length' => 'Kolom password tidak boleh lebih dari 100 karakter',
-                    'min_length' => 'Kolom password setidaknya terdiri dari 4 karakter'
+                    'required' => 'Alamat harus diisi',
+                    'max_length' => 'Kolom alamat tidak boleh lebih dari 100 karakter'
                 ]
             ],
-            'level' => [
+            'nohp' => [
+                'rules' => 'required|min_length[8]|max_length[25]',
+                'errors' => [
+                    'required' => 'No. Hp harus diisi',
+                    'max_length' => 'Kolom no. hp tidak boleh lebih dari 100 karakter',
+                    'min_length' => 'Kolom no. hp setidaknya terdiri dari 4 karakter'
+                ]
+            ],
+            'jenkel' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Level harus diisi'
+                    'required' => 'Jenis kelamin harus diisi'
                 ]
             ]
         ];
@@ -53,20 +52,21 @@ class AdminPenumpangController extends BaseController
         if ($this->validate($rules)) {
             $model = new AdminPenumpang();
             $data = array(
-                'userEmail' => $this->request->getPost('email'),
-                'userNama' => $this->request->getPost('nama'),
-                'userPassword' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-                'userRole' => $this->request->getPost('level'),
-                'userUpdatedAt' => date('Y-m-d H:i:s'),
-                'userCreatedAt' => date('Y-m-d H:i:s')
+                'penumpangNama' => $this->request->getPost('nama'),
+                'penumpangAlamat' => $this->request->getPost('alamat'),
+                'penumpangNoHp' => $this->request->getPost('nohp'),
+                'penumpangJenkel' => $this->request->getPost('jenkel'),
+                'penumpangUserId' => 0,
+                'penumpangUpdatedAt' => date('Y-m-d H:i:s'),
+                'penumpangCreatedAt' => date('Y-m-d H:i:s')
             );
-            $model->saveUser($data);
+            $model->saveData($data);
             session()->setFlashdata('success', 'Berhasil menyimpan data');
-            return redirect()->to('/admin/user');
+            return redirect()->to('/admin/penumpang');
         } else {
             session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
-            return redirect()->to('/admin/user')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/penumpang')->withInput()->with('validation', $validation);
         }
     }
 
