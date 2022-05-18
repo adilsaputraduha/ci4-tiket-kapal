@@ -63,6 +63,18 @@ $routes->post('/admin/rute/save', 'AdminRuteController::save', ['filter' => 'aut
 $routes->post('/admin/rute/edit', 'AdminRuteController::edit', ['filter' => 'auth']);
 $routes->post('/admin/rute/delete', 'AdminRuteController::delete', ['filter' => 'auth']);
 $routes->get('/admin/rute/laporan', 'AdminRuteController::laporan', ['filter' => 'auth']);
+// Rute
+$routes->get('/admin/rute', 'AdminRuteController::index', ['filter' => 'auth']);
+$routes->post('/admin/rute/save', 'AdminRuteController::save', ['filter' => 'auth']);
+$routes->post('/admin/rute/edit', 'AdminRuteController::edit', ['filter' => 'auth']);
+$routes->post('/admin/rute/delete', 'AdminRuteController::delete', ['filter' => 'auth']);
+$routes->get('/admin/rute/laporan', 'AdminRuteController::laporan', ['filter' => 'auth']);
+// Kapal
+$routes->get('/admin/kapal', 'AdminKapalController::index', ['filter' => 'auth']);
+$routes->post('/admin/kapal/save', 'AdminKapalController::save', ['filter' => 'auth']);
+$routes->post('/admin/kapal/edit', 'AdminKapalController::edit', ['filter' => 'auth']);
+$routes->post('/admin/kapal/delete', 'AdminKapalController::delete', ['filter' => 'auth']);
+$routes->get('/admin/kapal/laporan', 'AdminKapalController::laporan', ['filter' => 'auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing
