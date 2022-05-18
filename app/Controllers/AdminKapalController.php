@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-use App\Models\AdminRute;
+use App\Models\AdminKapal;
 
 class AdminKapalController extends BaseController
 {
     public function index()
     {
-        $model = new AdminRute();
+        $model = new AdminKapal();
         $data = [
             'kapal' => $model->getData()->getResultArray(),
             'validation' => \Config\Services::validation()
@@ -36,7 +36,7 @@ class AdminKapalController extends BaseController
         ];
 
         if ($this->validate($rules)) {
-            $model = new AdminRute();
+            $model = new AdminKapal();
             $data = array(
                 'ruteAsal' => $this->request->getPost('asal'),
                 'ruteTujuan' => $this->request->getPost('tujuan'),
@@ -75,7 +75,7 @@ class AdminKapalController extends BaseController
         $id = $this->request->getPost('id');
 
         if ($this->validate($rules)) {
-            $model = new AdminRute();
+            $model = new AdminKapal();
             $data = array(
                 'ruteAsal' => $this->request->getPost('asal'),
                 'ruteTujuan' => $this->request->getPost('tujuan'),
@@ -93,7 +93,7 @@ class AdminKapalController extends BaseController
 
     public function delete()
     {
-        $model = new AdminRute();
+        $model = new AdminKapal();
         $id = $this->request->getPost('id');
         $model->deleteData($id);
         session()->setFlashdata('success', 'Berhasil menghapus data');
@@ -102,7 +102,7 @@ class AdminKapalController extends BaseController
 
     public function laporan()
     {
-        $model = new AdminRute();
+        $model = new AdminKapal();
         $data['rute'] = $model->getData()->getResultArray();
         echo view('/admin/report_rute', $data);
     }
