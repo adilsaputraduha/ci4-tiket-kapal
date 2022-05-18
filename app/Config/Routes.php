@@ -51,6 +51,12 @@ $routes->post('/admin/penumpang/save', 'AdminPenumpangController::save', ['filte
 $routes->post('/admin/penumpang/edit', 'AdminPenumpangController::edit', ['filter' => 'auth']);
 $routes->post('/admin/penumpang/delete', 'AdminPenumpangController::delete', ['filter' => 'auth']);
 $routes->get('/admin/penumpang/laporan', 'AdminPenumpangController::laporan', ['filter' => 'auth']);
+// Kategori
+$routes->get('/admin/kategori', 'AdminKategoriController::index', ['filter' => 'auth']);
+$routes->post('/admin/kategori/save', 'AdminKategoriController::save', ['filter' => 'auth']);
+$routes->post('/admin/kategori/edit', 'AdminKategoriController::edit', ['filter' => 'auth']);
+$routes->post('/admin/kategori/delete', 'AdminKategoriController::delete', ['filter' => 'auth']);
+$routes->get('/admin/kategori/laporan', 'AdminKategoriController::laporan', ['filter' => 'auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

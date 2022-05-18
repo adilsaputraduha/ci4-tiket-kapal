@@ -33,9 +33,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="elements-icons.html">
+                        <a href="<?= base_url('/admin/kategori'); ?>">
                             <i class="metismenu-icon">
-                            </i>Icons
+                            </i>Kategori
                         </a>
                     </li>
                     <li>
