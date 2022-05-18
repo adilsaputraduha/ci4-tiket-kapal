@@ -128,7 +128,7 @@ class AdminPenumpangController extends BaseController
     public function laporan()
     {
         $model = new AdminPenumpang();
-        $data['user'] = $model->getUser()->getResultArray();
-        echo view('/admin/report_user', $data);
+        $data['penumpang'] = $model->getData()->getResultArray();
+        echo view('/admin/report_penumpang', $data);
     }
 }
