@@ -39,13 +39,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('/admin/rute'); ?>" class="mm-active">
+                        <a href="<?= base_url('/admin/rute'); ?>">
                             <i class="metismenu-icon">
                             </i>Rute
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('/admin/kapal'); ?>">
+                        <a href="<?= base_url('/admin/kapal'); ?>" class="mm-active">
                             <i class="metismenu-icon">
                             </i>Kapal
                         </a>
@@ -298,7 +298,7 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <i class="fa fa-route icon-gradient bg-mean-fruit">
+                        <i class="fa fa-ship icon-gradient bg-mean-fruit">
                         </i>
                     </div>
                     <div>Data Rute

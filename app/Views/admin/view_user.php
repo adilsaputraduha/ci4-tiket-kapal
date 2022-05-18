@@ -45,9 +45,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="elements-cards.html">
+                        <a href="<?= base_url('/admin/kapal'); ?>">
                             <i class="metismenu-icon">
-                            </i>Cards
+                            </i>Kapal
                         </a>
                     </li>
                     <li>
