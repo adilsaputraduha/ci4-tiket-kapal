@@ -33,13 +33,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('/admin/kategori'); ?>" class="mm-active">
+                        <a href="<?= base_url('/admin/kategori'); ?>">
                             <i class="metismenu-icon">
                             </i>Kategori
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('/admin/rute'); ?>">
+                        <a href="<?= base_url('/admin/rute'); ?>" class="mm-active">
                             <i class="metismenu-icon">
                             </i>Rute
                         </a>

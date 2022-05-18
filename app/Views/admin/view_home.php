@@ -39,9 +39,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="elements-badges-labels.html">
+                        <a href="<?= base_url('/admin/rute'); ?>">
                             <i class="metismenu-icon">
-                            </i>Badges
+                            </i>Rute
                         </a>
                     </li>
                     <li>

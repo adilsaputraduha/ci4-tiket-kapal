@@ -57,6 +57,12 @@ $routes->post('/admin/kategori/save', 'AdminKategoriController::save', ['filter'
 $routes->post('/admin/kategori/edit', 'AdminKategoriController::edit', ['filter' => 'auth']);
 $routes->post('/admin/kategori/delete', 'AdminKategoriController::delete', ['filter' => 'auth']);
 $routes->get('/admin/kategori/laporan', 'AdminKategoriController::laporan', ['filter' => 'auth']);
+// Rute
+$routes->get('/admin/rute', 'AdminRuteController::index', ['filter' => 'auth']);
+$routes->post('/admin/rute/save', 'AdminRuteController::save', ['filter' => 'auth']);
+$routes->post('/admin/rute/edit', 'AdminRuteController::edit', ['filter' => 'auth']);
+$routes->post('/admin/rute/delete', 'AdminRuteController::delete', ['filter' => 'auth']);
+$routes->get('/admin/rute/laporan', 'AdminRuteController::laporan', ['filter' => 'auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing
