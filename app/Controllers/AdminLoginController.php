@@ -24,6 +24,7 @@ class AdminLoginController extends BaseController
 
         if ($user) {
             if (password_verify($password, $user['userPassword'])) {
+                // if ($password == $user['userPassword']) {
                 session()->set('userId', $user['userId']);
                 session()->set('userNama', $user['userNama']);
                 session()->set('userEmail', $user['userEmail']);

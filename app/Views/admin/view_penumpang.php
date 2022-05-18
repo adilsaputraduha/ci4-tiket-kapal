@@ -456,15 +456,6 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= old('email'); ?>" required placeholder="Masukan email">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('email'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
                                     <label>Nama</label>
                                     <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= old('nama'); ?>" required placeholder="Masukan nama">
                                     <div class="invalid-feedback">
@@ -472,26 +463,35 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>No. Hp</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('nohp')) ? 'is-invalid' : ''; ?>" id="nohp" name="nohp" value="<?= old('nohp'); ?>" required placeholder="Masukan nohp">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('nohp'); ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" id="password" name="password" required placeholder="Masukan password">
+                                    <label>Alamat</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('alamat')) ? 'is-invalid' : ''; ?>" id="alamat" name="alamat" required placeholder="Masukan alamat">
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('password'); ?>
+                                        <?= $validation->getError('alamat'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Role</label>
-                                    <select name="level" id="level" required class="form-control <?= ($validation->hasError('level')) ? 'is-invalid' : ''; ?>">
-                                        <option value="1">Admin</option>
-                                        <option value="0">Super Admin</option>
+                                    <label>Jenis Kelamin</label>
+                                    <select name="jenkel" id="jenkel" required class="form-control <?= ($validation->hasError('jenkel')) ? 'is-invalid' : ''; ?>">
+                                        <option value="1">Laki-Laki</option>
+                                        <option value="0">Perempuan</option>
                                     </select>
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('level'); ?>
+                                        <?= $validation->getError('jenkel'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -545,7 +545,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Alamat</label>
                                     <input type="text" class="form-control <?= ($validation->hasError('alamat')) ? 'is-invalid' : ''; ?>" id="alamat" name="alamat" value="<?= $row['penumpangAlamat']; ?>" required placeholder="Masukan alamat">
@@ -554,8 +554,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Jenis Kelamin</label>
