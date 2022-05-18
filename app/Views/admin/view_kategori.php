@@ -382,7 +382,7 @@
                         </span>
                         Tambah
                     </button>
-                    <a href="<?= base_url('/admin/penumpang/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
+                    <a href="<?= base_url('/admin/kategori/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
                         <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
                             <i class="fa fa-print fa-w-20"></i>
                         </span>
@@ -480,7 +480,7 @@
 
 
 <?php foreach ($kategori as $row) : ?>
-    <form action="<?= base_url('admin/penumpang/edit'); ?>" enctype="multipart/form-data" method="POST">
+    <form action="<?= base_url('admin/kategori/edit'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
         <div class="modal fade" id="editModal<?= $row['kategoriId']; ?>" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md" role="document">
