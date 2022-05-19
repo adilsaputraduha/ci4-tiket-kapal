@@ -8,7 +8,8 @@ class AdminKapal extends Model
 {
     public function getData()
     {
-        $bulder = $this->db->table('tb_kapal');
+        $bulder = $this->db->table('tb_kapal')
+            ->join('tb_kategori', 'kapalKategori = kategoriId');
         return $bulder->get();
     }
     public function saveData($data)

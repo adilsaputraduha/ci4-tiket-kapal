@@ -409,7 +409,7 @@
                                         <td> <?= $no; ?></td>
                                         <td> <?= $row['kapalKode']; ?></td>
                                         <td> <?= $row['kapalNama']; ?></td>
-                                        <td> <?= $row['kapalKategori']; ?></td>
+                                        <td> <?= $row['kategoriNama']; ?></td>
                                         <td> <?= $row['kapalKapasitas']; ?></td>
                                         <td> <?= $row['kapalPemilik']; ?></td>
                                         <td style="text-align: center;">

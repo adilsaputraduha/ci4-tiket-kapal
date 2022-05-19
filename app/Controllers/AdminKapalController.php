@@ -103,7 +103,7 @@ class AdminKapalController extends BaseController
     public function laporan()
     {
         $model = new AdminKapal();
-        $data['rute'] = $model->getData()->getResultArray();
-        echo view('/admin/report_rute', $data);
+        $data['kapal'] = $model->getData()->getResultArray();
+        echo view('/admin/report_kapal', $data);
     }
 }
