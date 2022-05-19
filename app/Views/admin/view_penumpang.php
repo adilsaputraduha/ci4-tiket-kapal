@@ -50,24 +50,6 @@
                             </i>Kapal
                         </a>
                     </li>
-                    <li>
-                        <a href="elements-list-group.html">
-                            <i class="metismenu-icon">
-                            </i>List Groups
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-navigation.html">
-                            <i class="metismenu-icon">
-                            </i>Navigation Menus
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-utilities.html">
-                            <i class="metismenu-icon">
-                            </i>Utilities
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li>
