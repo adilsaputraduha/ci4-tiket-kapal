@@ -116,6 +116,40 @@ class AdminUserController extends BaseController
         }
     }
 
+    public function changepassword()
+    {
+        $rules = [
+            'password' => [
+                'rules' => 'required|min_length[4]|max_length[100]',
+                'errors' => [
+                    'required' => 'Password harus diisi',
+                    'max_length' => 'Kolom password tidak boleh lebih dari 100 karakter',
+                    'min_length' => 'Kolom password setidaknya terdiri dari 4 karakter'
+                ]
+            ]
+        ];
+
+        $id = $this->request->getPost('id');
+
+        if ($this->validate($rules)) {
+            $model = new AdminUser();
+            $data = array(
+                'userPassword' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
+            );
+            $model->updateUser($data, $id);
+            session()->remove('userId');
+            session()->remove('userNama');
+            session()->remove('userEmail');
+            session()->remove('userRole');
+            session()->setFlashdata('success', 'Berhasil keluar');
+            return redirect()->to('/admin/login');
+        } else {
+            session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
+            $validation = \Config\Services::validation();
+            return redirect()->to('/admin')->withInput()->with('validation', $validation);
+        }
+    }
+
     public function delete()
     {
         $model = new AdminUser();

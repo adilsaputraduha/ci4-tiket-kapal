@@ -84,8 +84,7 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">User Account</button>
-                                            <button type="button" tabindex="0" class="dropdown-item">Settings</button>
+                                            <button type="button" tabindex="0" data-toggle="modal" data-target="#changepasswordModal" class="dropdown-item">Ubah Password</button>
                                             <div tabindex="-1" class="dropdown-divider"></div>
                                             <a href="<?= base_url('/admin/logout'); ?>" tabindex="0" class="dropdown-item">Logout</a>
                                         </div>
@@ -148,6 +147,38 @@
             <?= $this->rendersection('content'); ?>
         </div>
     </div>
+
+    <form action="<?= base_url('admin/user/change-password'); ?>" enctype="multipart/form-data" method="POST">
+        <?= csrf_field(); ?>
+        <div class="modal fade" id="changepasswordModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title">Ubah password</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <input type="hidden" name="id" id="id" value="<?php echo session()->get('userId'); ?>">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Password Baru</label>
+                                    <input type="password" class="form-control" id="password" name="password" required placeholder="Masukan password baru">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary mt-2 mb-2" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary mt-2 mb-2 mr-2">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <script type="text/javascript" src="<?= base_url(); ?>/assets/assets/scripts/main.js"></script>
 
     <script type="text/javascript" src="<?= base_url(); ?>/assets/assets/media/js/jquerys.js"></script>

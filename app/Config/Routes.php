@@ -43,6 +43,7 @@ $routes->get('/admin/logout', 'AdminLoginController::logout', ['filter' => 'auth
 $routes->get('/admin/user', 'AdminUserController::index', ['filter' => 'auth']);
 $routes->post('/admin/user/save', 'AdminUserController::save', ['filter' => 'auth']);
 $routes->post('/admin/user/edit', 'AdminUserController::edit', ['filter' => 'auth']);
+$routes->post('/admin/user/change-password', 'AdminUserController::changepassword', ['filter' => 'auth']);
 $routes->post('/admin/user/delete', 'AdminUserController::delete', ['filter' => 'auth']);
 $routes->get('/admin/user/laporan', 'AdminUserController::laporan', ['filter' => 'auth']);
 // Penumpang
