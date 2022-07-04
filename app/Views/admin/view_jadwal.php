@@ -45,13 +45,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('/admin/kapal'); ?>" class="mm-active">
+                        <a href="<?= base_url('/admin/kapal'); ?>">
                             <i class="metismenu-icon">
                             </i>Kapal
                         </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('/admin/jadwal'); ?>">
+                        <a href="<?= base_url('/admin/jadwal'); ?>" class="mm-active">
                             <i class="metismenu-icon">
                             </i>Jadwal
                         </a>
@@ -286,11 +286,11 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <i class="fa fa-ship icon-gradient bg-mean-fruit">
+                        <i class="fa fa-sitemap icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Data Kapal
-                        <div class="page-title-subheading">This is a page for managing ship data.
+                    <div>Data Jadwal
+                        <div class="page-title-subheading">This is a page for managing jadwal data.
                         </div>
                     </div>
                 </div>
@@ -370,7 +370,7 @@
                         </span>
                         Tambah
                     </button>
-                    <a href="<?= base_url('/admin/kapal/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
+                    <a href="<?= base_url('/admin/kategori/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
                         <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
                             <i class="fa fa-print fa-w-20"></i>
                         </span>
@@ -381,30 +381,30 @@
                         <table id="datatable" name="datatable" class="table table-simple datatable">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Kode</th>
-                                    <th>Nama</th>
-                                    <th>Kategori</th>
-                                    <th>Kapasitas</th>
-                                    <th>Pemilik</th>
+                                    <th>Nama Kapal</th>
+                                    <th>Rute</th>
+                                    <th>Jadwal</th>
+                                    <th>Keterangan</th>
+                                    <th>Harga Dewasa</th>
+                                    <th>Harga Anak</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 0;
-                                foreach ($kapal as $row) : $no++ ?>
+                                foreach ($jadwal as $row) : $no++ ?>
                                     <tr>
-                                        <td> <?= $no; ?></td>
-                                        <td> <?= $row['kapalKode']; ?></td>
                                         <td> <?= $row['kapalNama']; ?></td>
-                                        <td> <?= $row['kategoriNama']; ?></td>
-                                        <td> <?= $row['kapalKapasitas']; ?></td>
-                                        <td> <?= $row['kapalPemilik']; ?></td>
+                                        <td> <?= $row['ruteAsal']; ?> - <?= $row['ruteTujuan']; ?></td>
+                                        <td> <?= $row['jadwalTanggal']; ?></td>
+                                        <td> <?= $row['jadwalKeterangan']; ?></td>
+                                        <td>Rp. <?= $row['jadwalHargaDewasa']; ?></td>
+                                        <td>Rp. <?= $row['jadwalHargaAnak']; ?></td>
                                         <td style="text-align: center;">
-                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['kapalId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
+                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['jadwalId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['kapalId']; ?>">
+                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['jadwalId']; ?>">
                                                 <i class="fa fa-ban"></i>
                                             </a>
                                         </td>
@@ -425,31 +425,22 @@
 <?= $this->section('modal'); ?>
 
 <div id="addModal" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="">Form Tambah Kapal</h6>
+                <h6 class="modal-title" id="">Form Tambah Kategori</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('admin/kapal/save'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('admin/kategori/save'); ?>" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Kode</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('kode')) ? 'is-invalid' : ''; ?>" id="kode" name="kode" value="<?= old('kode'); ?>" required placeholder="Masukan kode">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('kode'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Nama Kapal</label>
+                                    <label>Nama</label>
                                     <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= old('nama'); ?>" required placeholder="Masukan nama">
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('nama'); ?>
@@ -458,45 +449,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Kategori</label>
-                                    <select name="kategori" id="kategori" required class="form-control <?= ($validation->hasError('kategori')) ? 'is-invalid' : ''; ?>">
-                                        <?php foreach ($kategori as $row) : ?>
-                                            <option value="<?= $row['kategoriId']; ?>"><?= $row['kategoriNama']; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <label>Fasilitas</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('fasilitas')) ? 'is-invalid' : ''; ?>" id="fasilitas" name="fasilitas" required placeholder="Masukan fasilitas">
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('kategori'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Kapasitas</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('kapasitas')) ? 'is-invalid' : ''; ?>" id="kapasitas" name="kapasitas" value="<?= old('kapasitas'); ?>" required placeholder="Masukan kapasitas">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('kapasitas'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Pemilik</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('pemilik')) ? 'is-invalid' : ''; ?>" id="pemilik" name="pemilik" value="<?= old('pemilik'); ?>" required placeholder="Masukan pemilik">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('pemilik'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Foto Kapal</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" name="foto" value="<?= old('foto'); ?>" required placeholder="Masukan foto">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('foto'); ?>
+                                        <?= $validation->getError('fasilitas'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -515,84 +473,27 @@
 </div>
 
 
-<?php foreach ($kapal as $row) : ?>
-    <form action="<?= base_url('admin/kapal/edit'); ?>" enctype="multipart/form-data" method="POST">
+<?php foreach ($jadwal as $row) : ?>
+    <form action="<?= base_url('admin/kategori/edit'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
-        <div class="modal fade" id="editModal<?= $row['kapalId']; ?>" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
+        <div class="modal fade" id="editModal<?= $row['jadwalId']; ?>" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title">Form Edit Kapal</h6>
+                        <h6 class="modal-title">Form Edit Kategori</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <input type="hidden" name="id" id="id" value="<?= $row['kapalId']; ?>">
-                            <div class="col-sm-6">
+                            <input type="hidden" name="id" id="id" value="<?= $row['jadwalId']; ?>">
+                            <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Kode</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('kode')) ? 'is-invalid' : ''; ?>" id="kode" name="kode" value="<?= $row['kapalKode']; ?>" required placeholder="Masukan kode">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('kode'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Nama Kapal</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= $row['kapalNama']; ?>" required placeholder="Masukan nama">
+                                    <label>Nama</label>
+                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= $row['jadwalKeterangan']; ?>" required placeholder="Masukan nama">
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('nama'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Kategori</label>
-                                    <select name="kategori" id="kategori" required class="form-control <?= ($validation->hasError('kategori')) ? 'is-invalid' : ''; ?>">
-                                        <?php foreach ($kategori as $rowsatu) : ?>
-                                            <?php if ($row['kapalKategori'] == $rowsatu['kategoriId']) { ?>
-                                                <option selected value="<?= $rowsatu['kategoriId']; ?>"><?= $rowsatu['kategoriNama']; ?></option>
-                                            <?php } else { ?>
-                                                <option value="<?= $rowsatu['kategoriId']; ?>"><?= $rowsatu['kategoriNama']; ?></option>
-                                            <?php } ?>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('kategori'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Kapasitas</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('kapasitas')) ? 'is-invalid' : ''; ?>" id="kapasitas" name="kapasitas" value="<?= $row['kapalKapasitas']; ?>" required placeholder="Masukan kapasitas">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('kapasitas'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Pemilik</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('pemilik')) ? 'is-invalid' : ''; ?>" id="pemilik" name="pemilik" value="<?= $row['kapalPemilik']; ?>" required placeholder="Masukan pemilik">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('pemilik'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Foto Kapal</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" name="foto" value="<?= $row['kapalFoto']; ?>" required placeholder="Masukan foto">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('foto'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -606,19 +507,19 @@
             </div>
         </div>
     </form>
-    <form action="<?= base_url('admin/kapal/delete'); ?>" enctype="multipart/form-data" method="POST">
+    <form action="<?= base_url('admin/kategori/delete'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
-        <div class="modal" tabindex="-1" id="deleteModal<?= $row['kapalId']; ?>">
+        <div class="modal" tabindex="-1" id="deleteModal<?= $row['jadwalId']; ?>">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Hapus Kapal</h5>
+                        <h5 class="modal-title">Hapus Kategori</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="id" required value="<?= $row['kapalId']; ?>" />
+                        <input type="hidden" name="id" required value="<?= $row['jadwalId']; ?>" />
                         <h6>Yakin ingin menghapus data ini?</h6>
                     </div>
                     <div class="modal-footer">

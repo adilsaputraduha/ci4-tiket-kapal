@@ -3,14 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\AdminKapal;
+use App\Models\AdminKategori;
 
 class AdminKapalController extends BaseController
 {
     public function index()
     {
         $model = new AdminKapal();
+        $modelsatu = new AdminKategori();
         $data = [
             'kapal' => $model->getData()->getResultArray(),
+            'kategori' => $modelsatu->getData()->getResultArray(),
             'validation' => \Config\Services::validation()
         ];
         echo view('/admin/view_kapal', $data);

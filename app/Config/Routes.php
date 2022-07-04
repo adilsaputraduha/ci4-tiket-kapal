@@ -76,6 +76,12 @@ $routes->post('/admin/kapal/save', 'AdminKapalController::save', ['filter' => 'a
 $routes->post('/admin/kapal/edit', 'AdminKapalController::edit', ['filter' => 'auth']);
 $routes->post('/admin/kapal/delete', 'AdminKapalController::delete', ['filter' => 'auth']);
 $routes->get('/admin/kapal/laporan', 'AdminKapalController::laporan', ['filter' => 'auth']);
+// Jadwal
+$routes->get('/admin/jadwal', 'AdminJadwalController::index', ['filter' => 'auth']);
+$routes->post('/admin/jadwal/save', 'AdminJadwalController::save', ['filter' => 'auth']);
+$routes->post('/admin/jadwal/edit', 'AdminJadwalController::edit', ['filter' => 'auth']);
+$routes->post('/admin/jadwal/delete', 'AdminJadwalController::delete', ['filter' => 'auth']);
+$routes->get('/admin/jadwal/laporan', 'AdminJadwalController::laporan', ['filter' => 'auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing
