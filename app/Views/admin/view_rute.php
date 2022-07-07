@@ -66,7 +66,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="<?= base_url('/admin/kapal'); ?>">
+                        <a href="<?= base_url('/admin/pemesanan'); ?>">
                             <i class="metismenu-icon">
                             </i>Pemesanan Tiket
                         </a>

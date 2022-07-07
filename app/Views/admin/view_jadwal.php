@@ -66,7 +66,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="<?= base_url('/admin/kapal'); ?>">
+                        <a href="<?= base_url('/admin/pemesanan'); ?>">
                             <i class="metismenu-icon">
                             </i>Pemesanan Tiket
                         </a>
@@ -226,7 +226,7 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <i class="fa fa-sitemap icon-gradient bg-mean-fruit">
+                        <i class="fa fa-calendar-check icon-gradient bg-mean-fruit">
                         </i>
                     </div>
                     <div>Data Jadwal
@@ -310,7 +310,7 @@
                         </span>
                         Tambah
                     </button>
-                    <a href="<?= base_url('/admin/kategori/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
+                    <a href="<?= base_url('/admin/jadwal/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
                         <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
                             <i class="fa fa-print fa-w-20"></i>
                         </span>
@@ -336,7 +336,7 @@
                                     <tr>
                                         <td> <?= $row['kapalNama']; ?></td>
                                         <td> <?= $row['ruteAsal']; ?> - <?= $row['ruteTujuan']; ?></td>
-                                        <td> <?= $row['jadwalTanggal']; ?></td>
+                                        <td> <?= $row['jadwalTanggal']; ?> - <?= $row['jadwalJam']; ?></td>
                                         <td> <?= $row['jadwalKeterangan']; ?></td>
                                         <td>Rp. <?= $row['jadwalHargaDewasa']; ?></td>
                                         <td>Rp. <?= $row['jadwalHargaAnak']; ?></td>
@@ -365,36 +365,93 @@
 <?= $this->section('modal'); ?>
 
 <div id="addModal" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title" id="">Form Tambah Kategori</h6>
+                <h6 class="modal-title" id="">Form Tambah Jadwal</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?= base_url('admin/kategori/save'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('admin/jadwal/save'); ?>" method="POST" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= old('nama'); ?>" required placeholder="Masukan nama">
+                                    <label>Kapal</label>
+                                    <select name="kapal" id="kapal" required class="form-control <?= ($validation->hasError('kapal')) ? 'is-invalid' : ''; ?>">
+                                        <?php foreach ($kapal as $row) : ?>
+                                            <option value="<?= $row['kapalId']; ?>"><?= $row['kapalNama']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('nama'); ?>
+                                        <?= $validation->getError('kapal'); ?>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Rute</label>
+                                    <select name="rute" id="rute" required class="form-control <?= ($validation->hasError('rute')) ? 'is-invalid' : ''; ?>">
+                                        <?php foreach ($rute as $row) : ?>
+                                            <option value="<?= $row['ruteId']; ?>"><?= $row['ruteAsal']; ?> - <?= $row['ruteTujuan']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('kapal'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tanggal</label>
+                                    <input type="date" id="tanggal" name="tanggal" class="form-control <?= ($validation->hasError('tanggal')) ? 'is-invalid' : ''; ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('tanggal'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Jam Berangkat</label>
+                                    <input type="time" id="jam" name="jam" class="form-control <?= ($validation->hasError('jam')) ? 'is-invalid' : ''; ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('jam'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Harga Dewasa</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Rp.</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="hargadewasa" placeholder="0" onkeypress="return onlyNumber(event)">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Harga Anak-Anak</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Rp.</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="hargaanak" placeholder="0" onkeypress="return onlyNumber(event)">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Fasilitas</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('fasilitas')) ? 'is-invalid' : ''; ?>" id="fasilitas" name="fasilitas" required placeholder="Masukan fasilitas">
+                                    <label>Keterangan</label>
+                                    <textarea class="form-control <?= ($validation->hasError('keterangan')) ? 'is-invalid' : ''; ?>" rows="4" id="keterangan" name="keterangan" required placeholder="Masukan keterangan"></textarea>
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('fasilitas'); ?>
+                                        <?= $validation->getError('keterangan'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -412,28 +469,103 @@
     </div>
 </div>
 
-
 <?php foreach ($jadwal as $row) : ?>
-    <form action="<?= base_url('admin/kategori/edit'); ?>" enctype="multipart/form-data" method="POST">
+    <form action="<?= base_url('admin/jadwal/edit'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
         <div class="modal fade" id="editModal<?= $row['jadwalId']; ?>" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-md" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title">Form Edit Kategori</h6>
+                        <h6 class="modal-title">Form Edit Jadwal</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <input type="hidden" name="id" id="id" value="<?= $row['jadwalId']; ?>">
                         <div class="row">
-                            <input type="hidden" name="id" id="id" value="<?= $row['jadwalId']; ?>">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Kapal</label>
+                                    <select name="kapal" id="kapal" required class="form-control <?= ($validation->hasError('kapal')) ? 'is-invalid' : ''; ?>">
+                                        <?php foreach ($kapal as $rowsatu) : ?>
+                                            <?php if ($row['jadwalKapal'] == $row['kapalId']) { ?>
+                                                <option selected value="<?= $rowsatu['kapalId']; ?>"><?= $rowsatu['kapalNama']; ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?= $rowsatu['kapalId']; ?>"><?= $rowsatu['kapalNama']; ?></option>
+                                            <?php } ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('kapal'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Rute</label>
+                                    <select name="rute" id="rute" required class="form-control <?= ($validation->hasError('rute')) ? 'is-invalid' : ''; ?>">
+                                        <?php foreach ($rute as $rowsatu) : ?>
+                                            <?php if ($row['jadwalRute'] == $row['ruteId']) { ?>
+                                                <option selected value="<?= $rowsatu['ruteId']; ?>"><?= $rowsatu['ruteAsal']; ?> - <?= $rowsatu['ruteTujuan']; ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?= $rowsatu['ruteId']; ?>"><?= $rowsatu['ruteAsal']; ?> - <?= $rowsatu['ruteTujuan']; ?></option>
+                                            <?php } ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('kapal'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tanggal</label>
+                                    <input type="date" id="tanggal" name="tanggal" value="<?= $row['jadwalTanggal']; ?>" class="form-control <?= ($validation->hasError('tanggal')) ? 'is-invalid' : ''; ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('tanggal'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Jam Berangkat</label>
+                                    <input type="time" id="jam" name="jam" value="<?= $row['jadwalJam']; ?>" class="form-control <?= ($validation->hasError('jam')) ? 'is-invalid' : ''; ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('jam'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>Harga Dewasa</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Rp.</span>
+                                    </div>
+                                    <input type="text" class="form-control" value="<?= $row['jadwalHargaDewasa']; ?>" name="hargadewasa" placeholder="0" onkeypress="return onlyNumber(event)">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Harga Anak-Anak</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Rp.</span>
+                                    </div>
+                                    <input type="text" class="form-control" value="<?= $row['jadwalHargaAnak']; ?>" name="hargaanak" placeholder="0" onkeypress="return onlyNumber(event)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= $row['jadwalKeterangan']; ?>" required placeholder="Masukan nama">
+                                    <label>Keterangan</label>
+                                    <textarea class="form-control <?= ($validation->hasError('keterangan')) ? 'is-invalid' : ''; ?>" rows="4" id="keterangan" name="keterangan" required placeholder="Masukan keterangan"><?= $row['jadwalKeterangan']; ?></textarea>
                                     <div class="invalid-feedback">
-                                        <?= $validation->getError('nama'); ?>
+                                        <?= $validation->getError('keterangan'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -447,13 +579,13 @@
             </div>
         </div>
     </form>
-    <form action="<?= base_url('admin/kategori/delete'); ?>" enctype="multipart/form-data" method="POST">
+    <form action="<?= base_url('admin/jadwal/delete'); ?>" enctype="multipart/form-data" method="POST">
         <?= csrf_field(); ?>
         <div class="modal" tabindex="-1" id="deleteModal<?= $row['jadwalId']; ?>">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Hapus Kategori</h5>
+                        <h5 class="modal-title">Hapus Jadwal</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -471,5 +603,14 @@
         </div>
     </form>
 <?php endforeach; ?>
+
+<script>
+    function onlyNumber(event) {
+        var angka = (event.which) ? event.which : event.keyCode
+        if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
+            return false;
+        return true;
+    }
+</script>
 
 <?= $this->endSection(); ?>

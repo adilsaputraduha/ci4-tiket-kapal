@@ -8,7 +8,8 @@ class AdminPemesanan extends Model
 {
     public function getData()
     {
-        $bulder = $this->db->table('tb_pemesanan');
+        $bulder = $this->db->table('tb_pemesanan')
+            ->join('tb_penumpang', 'penumpangId = pemesananPenumpang');
         return $bulder->get();
     }
     public function saveData($data)

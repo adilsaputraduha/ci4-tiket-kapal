@@ -66,7 +66,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="<?= base_url('/admin/kapal'); ?>">
+                        <a href="<?= base_url('/admin/pemesanan'); ?>">
                             <i class="metismenu-icon">
                             </i>Pemesanan Tiket
                         </a>
@@ -321,7 +321,6 @@
                         <table id="datatable" name="datatable" class="table table-simple datatable">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Kode</th>
                                     <th>Nama</th>
                                     <th>Kategori</th>
@@ -334,7 +333,6 @@
                                 <?php $no = 0;
                                 foreach ($kapal as $row) : $no++ ?>
                                     <tr>
-                                        <td> <?= $no; ?></td>
                                         <td> <?= $row['kapalKode']; ?></td>
                                         <td> <?= $row['kapalNama']; ?></td>
                                         <td> <?= $row['kategoriNama']; ?></td>
@@ -441,6 +439,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Pemilik</label>
+                                    <textarea class="form-control <?= ($validation->hasError('keterangan')) ? 'is-invalid' : ''; ?>" rows="4" id="keterangan" name="keterangan" required placeholder="Masukan keterangan"></textarea>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('keterangan'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <div class="float-right">
@@ -473,7 +482,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Kode</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('kode')) ? 'is-invalid' : ''; ?>" id="kode" name="kode" value="<?= $row['kapalKode']; ?>" required placeholder="Masukan kode">
+                                    <input type="text" readonly class="form-control <?= ($validation->hasError('kode')) ? 'is-invalid' : ''; ?>" id="kode" name="kode" value="<?= $row['kapalKode']; ?>" required placeholder="Masukan kode">
                                     <div class="invalid-feedback">
                                         <?= $validation->getError('kode'); ?>
                                     </div>
@@ -537,6 +546,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Pemilik</label>
+                                    <textarea class="form-control <?= ($validation->hasError('keterangan')) ? 'is-invalid' : ''; ?>" rows="4" id="keterangan" name="keterangan" required placeholder="Masukan keterangan"><?= $row['kapalKeterangan']; ?></textarea>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('keterangan'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary mt-2 mb-2" data-dismiss="modal">Batal</button>
@@ -552,7 +572,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Hapus Kapal</h5>
+                        <h6 class="modal-title">Hapus Kapal</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

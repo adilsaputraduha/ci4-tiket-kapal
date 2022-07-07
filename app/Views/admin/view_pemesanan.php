@@ -13,15 +13,15 @@
                 </a>
             </li>
             <li class="app-sidebar__heading">Administrator</li>
-            <li class="mm-active">
+            <li>
                 <a href="#">
                     <i class="metismenu-icon pe-7s-diamond"></i>
                     Masters
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
-                <ul class="mm-show">
+                <ul>
                     <li>
-                        <a href="<?= base_url('/admin/user'); ?>" class="mm-active">
+                        <a href="<?= base_url('/admin/user'); ?>">
                             <i class="metismenu-icon"></i>
                             User
                         </a>
@@ -58,15 +58,15 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="mm-active">
                 <a href="#">
                     <i class="metismenu-icon pe-7s-car"></i>
                     Transactions
                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
-                <ul>
+                <ul class="mm-show">
                     <li>
-                        <a href="<?= base_url('/admin/pemesanan'); ?>">
+                        <a href="<?= base_url('/admin/pemesanan'); ?>" class="mm-active">
                             <i class="metismenu-icon">
                             </i>Pemesanan Tiket
                         </a>
@@ -226,11 +226,11 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <i class="pe-7s-user icon-gradient bg-mean-fruit">
+                        <i class="fa fa-file-invoice icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Data User
-                        <div class="page-title-subheading">This is a page for managing user data.
+                    <div>Data Pemesanan
+                        <div class="page-title-subheading">This is a page for managing pemesanan data.
                         </div>
                     </div>
                 </div>
@@ -304,13 +304,13 @@
             <?php } ?>
             <div class="app-main__inner">
                 <div class="box-body">
-                    <button data-toggle="modal" data-target="#addModal" class="btn btn-outline-info btn-lg col-md-2 mb-2">
+                    <a href="<?= base_url('/admin/pemesanan/tambah'); ?>" class="btn btn-outline-info btn-lg col-md-2 mb-2">
                         <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
                             <i class="fa fa-plus fa-w-20"></i>
                         </span>
                         Tambah
-                    </button>
-                    <a href="<?= base_url('/admin/user/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
+                    </a>
+                    <a href="<?= base_url('/admin/penumpang/laporan'); ?>" target="__blank" class="btn btn-outline-success btn-lg col-md-2 mb-2">
                         <span class="btn-icon-wrapper pr-2 opacity-7" aria-hidden="true">
                             <i class="fa fa-print fa-w-20"></i>
                         </span>
@@ -321,31 +321,28 @@
                         <table id="datatable" name="datatable" class="table table-simple datatable">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Email</th>
-                                    <th>Nama</th>
-                                    <th>Role</th>
+                                    <th>Invoice</th>
+                                    <th>Tanggal</th>
+                                    <th>Penumpang</th>
+                                    <th>Total Tiket</th>
+                                    <th>Total Harga</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 0;
-                                foreach ($user as $row) : $no++ ?>
+                                foreach ($pemesanan as $row) : $no++ ?>
                                     <tr>
-                                        <td> <?= $no; ?></td>
-                                        <td> <?= $row['userEmail']; ?></td>
-                                        <td> <?= $row['userNama']; ?></td>
-                                        <td>
-                                            <?php if ($row['userRole'] == 1) { ?>
-                                                <span class="badge bg-primary text-light">Admin</span>
-                                            <?php } else if ($row['userRole'] == 0) { ?>
-                                                <span class="badge bg-info text-light">Super Admin</span>
-                                            <?php } ?>
+                                        <td> <?= $row['pemesananInvoice']; ?></td>
+                                        <td> <?= $row['pemesananTanggal']; ?></td>
+                                        <td> <?= $row['penumpangNama']; ?></td>
+                                        <td> <?= $row['pemesananTotalTiket']; ?></td>
+                                        <td> <?= $row['pemesananTotalHarga']; ?></td>
                                         <td style="text-align: center;">
-                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['userId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
+                                            <a href="#" data-toggle="modal" data-target="#editModal<?= $row['pemesananInvoice']; ?>" class="btn-transition btn btn-outline-primary btn-update">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['userId']; ?>">
+                                            <a href="#" class="btn-transition btn btn-outline-danger btn-delete" data-toggle="modal" data-target="#deleteModal<?= $row['pemesananInvoice']; ?>">
                                                 <i class="fa fa-ban"></i>
                                             </a>
                                         </td>
@@ -360,175 +357,5 @@
         </div>
     </div>
 </div>
-
-<?= $this->endSection(); ?>
-
-<?= $this->section('modal'); ?>
-
-<div id="addModal" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="modal-title" id="">Form Tambah User</h6>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="<?= base_url('admin/user/save'); ?>" method="POST" enctype="multipart/form-data">
-                    <?= csrf_field(); ?>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= old('email'); ?>" required placeholder="Masukan email">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('email'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= old('nama'); ?>" required placeholder="Masukan nama">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('nama'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" id="password" name="password" required placeholder="Masukan password">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('password'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Role</label>
-                                    <select name="level" id="level" required class="form-control <?= ($validation->hasError('level')) ? 'is-invalid' : ''; ?>">
-                                        <option value="1">Admin</option>
-                                        <option value="0">Super Admin</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('level'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="float-right">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-info">Simpan</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<?php foreach ($user as $row) : ?>
-    <form action="<?= base_url('admin/user/edit'); ?>" enctype="multipart/form-data" method="POST">
-        <?= csrf_field(); ?>
-        <div class="modal fade" id="editModal<?= $row['userId']; ?>" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="modal-title">Form Edit User</h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <input type="hidden" name="id" id="id" value="<?= $row['userId']; ?>">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" readonly class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= $row['userEmail']; ?>" required placeholder="Masukan email">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('email'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" class="form-control <?= ($validation->hasError('nama')) ? 'is-invalid' : ''; ?>" id="nama" name="nama" value="<?= $row['userNama']; ?>" required placeholder="Masukan nama">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('nama'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" readonly class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" id="password" name="password" value="<?= $row['userPassword']; ?>" required placeholder="Masukan password">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('password'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Level</label>
-                                    <select name="level" id="level" required class="form-control <?= ($validation->hasError('level')) ? 'is-invalid' : ''; ?>">
-                                        <?php if ($row['userRole'] == 1) { ?>
-                                            <option selected value="1">Admin</option>
-                                            <option value="0">Super Admin</option>
-                                        <?php } else if ($row['userRole'] == 0) { ?>
-                                            <option selected value="0">Super Admin</option>
-                                            <option value="1">Admin</option>
-                                        <?php } ?>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('level'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary mt-2 mb-2" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary mt-2 mb-2 mr-2">Edit</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <form action="<?= base_url('admin/user/delete'); ?>" enctype="multipart/form-data" method="POST">
-        <?= csrf_field(); ?>
-        <div class="modal" tabindex="-1" id="deleteModal<?= $row['userId']; ?>">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Hapus User</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="id" required value="<?= $row['userId']; ?>" />
-                        <h6>Yakin ingin menghapus data ini?</h6>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                        <button type="submit" class="btn btn-primary mt-2 mb-2 mr-2">Yakin</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-<?php endforeach; ?>
 
 <?= $this->endSection(); ?>

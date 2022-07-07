@@ -82,6 +82,13 @@ $routes->post('/admin/jadwal/save', 'AdminJadwalController::save', ['filter' => 
 $routes->post('/admin/jadwal/edit', 'AdminJadwalController::edit', ['filter' => 'auth']);
 $routes->post('/admin/jadwal/delete', 'AdminJadwalController::delete', ['filter' => 'auth']);
 $routes->get('/admin/jadwal/laporan', 'AdminJadwalController::laporan', ['filter' => 'auth']);
+// Pemesanan
+$routes->get('/admin/pemesanan', 'AdminPemesananController::index', ['filter' => 'auth']);
+$routes->get('/admin/pemesanan/tambah', 'AdminPemesananController::add', ['filter' => 'auth']);
+$routes->post('/admin/pemesanan/save', 'AdminPemesananController::save', ['filter' => 'auth']);
+$routes->post('/admin/pemesanan/edit', 'AdminPemesananController::edit', ['filter' => 'auth']);
+$routes->post('/admin/pemesanan/delete', 'AdminPemesananController::delete', ['filter' => 'auth']);
+$routes->get('/admin/pemesanan/laporan', 'AdminPemesananController::laporan', ['filter' => 'auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

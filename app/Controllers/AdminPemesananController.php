@@ -2,18 +2,46 @@
 
 namespace App\Controllers;
 
+use App\Models\AdminJadwal;
 use App\Models\AdminPemesanan;
+use App\Models\AdminPenumpang;
 
-class AdminRuteController extends BaseController
+class AdminPemesananController extends BaseController
 {
     public function index()
     {
         $model = new AdminPemesanan();
         $data = [
-            'rute' => $model->getData()->getResultArray(),
+            'pemesanan' => $model->getData()->getResultArray(),
             'validation' => \Config\Services::validation()
         ];
-        echo view('/admin/view_rute', $data);
+        echo view('/admin/view_pemesanan', $data);
+    }
+
+    public function add()
+    {
+        // Nomor otomatis
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT max(pemesananInvoice) as biggerCode FROM tb_pemesanan");
+        $row = $query->getRowArray();
+        $kodeTerbesar = $row['biggerCode'];
+        $urutan = (int) substr($kodeTerbesar, 3, 1);
+        $urutan++;
+        $huruf = "INV-";
+        $date = date('YmdH');
+        $kodeInvoice = $huruf .  $date . sprintf("%03s", $urutan);
+
+        $model = new AdminPemesanan();
+        $modelsatu = new AdminPenumpang();
+        $modeldua = new AdminJadwal();
+        $data = [
+            'pemesanan' => $model->getData()->getResultArray(),
+            'penumpang' => $modelsatu->getData()->getResultArray(),
+            'jadwal' => $modeldua->getData()->getResultArray(),
+            'validation' => \Config\Services::validation(),
+            'kode' => $kodeInvoice
+        ];
+        echo view('/admin/view_tambah_pemesanan', $data);
     }
 
     public function save()

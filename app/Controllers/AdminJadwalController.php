@@ -25,18 +25,34 @@ class AdminJadwalController extends BaseController
     public function save()
     {
         $rules = [
-            'nama' => [
-                'rules' => 'required|max_length[100]',
+            'tanggal' => [
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nama harus diisi',
-                    'max_length' => 'Kolom nama tidak boleh lebih dari 20 karakter'
+                    'required' => 'Tanggal harus diisi',
                 ]
             ],
-            'fasilitas' => [
-                'rules' => 'required|max_length[255]',
+            'jam' => [
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Fasilitas harus diisi',
-                    'max_length' => 'Kolom fasilitas tidak boleh lebih dari 255 karakter'
+                    'required' => 'Jam harus diisi',
+                ]
+            ],
+            'hargadewasa' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Harga Dewasa harus diisi',
+                ]
+            ],
+            'hargaanak' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Harga Anak harus diisi',
+                ]
+            ],
+            'keterangan' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Keterangan harus diisi',
                 ]
             ]
         ];
@@ -44,36 +60,57 @@ class AdminJadwalController extends BaseController
         if ($this->validate($rules)) {
             $model = new AdminJadwal();
             $data = array(
-                'kategoriNama' => $this->request->getPost('nama'),
-                'kategoriFasilitas' => $this->request->getPost('fasilitas'),
-                'kategoriUpdatedAt' => date('Y-m-d H:i:s'),
-                'kategoriCreatedAt' => date('Y-m-d H:i:s')
+                'jadwalKapal' => $this->request->getPost('kapal'),
+                'jadwalRute' => $this->request->getPost('rute'),
+                'jadwalTanggal' => $this->request->getPost('tanggal'),
+                'jadwalJam' => $this->request->getPost('jam'),
+                'jadwalKeterangan' => $this->request->getPost('keterangan'),
+                'jadwalHargaDewasa' => $this->request->getPost('hargadewasa'),
+                'jadwalHargaAnak' => $this->request->getPost('hargaanak'),
+                'jadwalUpdatedAt' => date('Y-m-d H:i:s'),
+                'jadwalCreatedAt' => date('Y-m-d H:i:s')
             );
             $model->saveData($data);
             session()->setFlashdata('success', 'Berhasil menyimpan data');
-            return redirect()->to('/admin/kategori');
+            return redirect()->to('/admin/jadwal');
         } else {
             session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
-            return redirect()->to('/admin/kategori')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/jadwal')->withInput()->with('validation', $validation);
         }
     }
 
     public function edit()
     {
         $rules = [
-            'nama' => [
-                'rules' => 'required|max_length[100]',
+            'tanggal' => [
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nama harus diisi',
-                    'max_length' => 'Kolom nama tidak boleh lebih dari 20 karakter'
+                    'required' => 'Tanggal harus diisi',
                 ]
             ],
-            'fasilitas' => [
-                'rules' => 'required|max_length[255]',
+            'jam' => [
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'Fasilitas harus diisi',
-                    'max_length' => 'Kolom fasilitas tidak boleh lebih dari 255 karakter'
+                    'required' => 'Jam harus diisi',
+                ]
+            ],
+            'hargadewasa' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Harga Dewasa harus diisi',
+                ]
+            ],
+            'hargaanak' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Harga Anak harus diisi',
+                ]
+            ],
+            'keterangan' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Keterangan harus diisi',
                 ]
             ]
         ];
@@ -83,17 +120,22 @@ class AdminJadwalController extends BaseController
         if ($this->validate($rules)) {
             $model = new AdminJadwal();
             $data = array(
-                'kategoriNama' => $this->request->getPost('nama'),
-                'kategoriFasilitas' => $this->request->getPost('fasilitas'),
-                'kategoriUpdatedAt' => date('Y-m-d H:i:s'),
+                'jadwalKapal' => $this->request->getPost('kapal'),
+                'jadwalRute' => $this->request->getPost('rute'),
+                'jadwalTanggal' => $this->request->getPost('tanggal'),
+                'jadwalJam' => $this->request->getPost('jam'),
+                'jadwalKeterangan' => $this->request->getPost('keterangan'),
+                'jadwalHargaDewasa' => $this->request->getPost('hargadewasa'),
+                'jadwalHargaAnak' => $this->request->getPost('hargaanak'),
+                'jadwalUpdatedAt' => date('Y-m-d H:i:s'),
             );
             $model->updateData($data, $id);
             session()->setFlashdata('success', 'Berhasil edit data');
-            return redirect()->to('/admin/kategori');
+            return redirect()->to('/admin/jadwal');
         } else {
             session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
-            return redirect()->to('/admin/kategori')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/jadwal')->withInput()->with('validation', $validation);
         }
     }
 
@@ -103,13 +145,13 @@ class AdminJadwalController extends BaseController
         $id = $this->request->getPost('id');
         $model->deleteData($id);
         session()->setFlashdata('success', 'Berhasil menghapus data');
-        return redirect()->to('/admin/kategori');
+        return redirect()->to('/admin/jadwal');
     }
 
     public function laporan()
     {
         $model = new AdminJadwal();
-        $data['kategori'] = $model->getData()->getResultArray();
-        echo view('/admin/report_kategori', $data);
+        $data['jadwal'] = $model->getData()->getResultArray();
+        echo view('/admin/report_jadwal', $data);
     }
 }

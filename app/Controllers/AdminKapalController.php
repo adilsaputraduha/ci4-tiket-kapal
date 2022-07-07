@@ -22,18 +22,39 @@ class AdminKapalController extends BaseController
     public function save()
     {
         $rules = [
-            'asal' => [
-                'rules' => 'required|max_length[255]',
+            'kode' => [
+                'rules' => 'required|max_length[100]',
                 'errors' => [
-                    'required' => 'Asal harus diisi',
-                    'max_length' => 'Kolom asal tidak boleh lebih dari 20 karakter'
+                    'required' => 'Kode harus diisi',
+                    'max_length' => 'Kolom kode tidak boleh lebih dari 100 karakter'
                 ]
             ],
-            'tujuan' => [
+            'nama' => [
                 'rules' => 'required|max_length[255]',
                 'errors' => [
-                    'required' => 'Tujuan harus diisi',
-                    'max_length' => 'Kolom tujuan tidak boleh lebih dari 255 karakter'
+                    'required' => 'Nama harus diisi',
+                    'max_length' => 'Kolom nama tidak boleh lebih dari 255 karakter'
+                ]
+            ],
+            'kapasitas' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kapasitas harus diisi',
+                    'max_length' => 'Kolom kapasitas tidak boleh lebih dari 255 karakter'
+                ]
+            ],
+            'pemilik' => [
+                'rules' => 'required|max_length[255]',
+                'errors' => [
+                    'required' => 'Pemilik harus diisi',
+                    'max_length' => 'Kolom pemilik tidak boleh lebih dari 255 karakter'
+                ]
+            ],
+            'keterangan' => [
+                'rules' => 'required|max_length[255]',
+                'errors' => [
+                    'required' => 'Keterangan harus diisi',
+                    'max_length' => 'Kolom keterangan tidak boleh lebih dari 255 karakter'
                 ]
             ]
         ];
@@ -41,36 +62,55 @@ class AdminKapalController extends BaseController
         if ($this->validate($rules)) {
             $model = new AdminKapal();
             $data = array(
-                'ruteAsal' => $this->request->getPost('asal'),
-                'ruteTujuan' => $this->request->getPost('tujuan'),
-                'ruteUpdatedAt' => date('Y-m-d H:i:s'),
-                'ruteCreatedAt' => date('Y-m-d H:i:s')
+                'kapalKode' => $this->request->getPost('kode'),
+                'kapalNama' => $this->request->getPost('nama'),
+                'kapalKategori' => $this->request->getPost('kategori'),
+                'kapalKapasitas' => $this->request->getPost('kapasitas'),
+                'kapalPemilik' => $this->request->getPost('pemilik'),
+                'kapalFoto' => 'default.png',
+                'kapalKeterangan' => $this->request->getPost('keterangan'),
+                'kapalUpdatedAt' => date('Y-m-d H:i:s'),
+                'kapalCreatedAt' => date('Y-m-d H:i:s')
             );
             $model->saveData($data);
             session()->setFlashdata('success', 'Berhasil menyimpan data');
-            return redirect()->to('/admin/rute');
+            return redirect()->to('/admin/kapal');
         } else {
             session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
-            return redirect()->to('/admin/rute')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/kapal')->withInput()->with('validation', $validation);
         }
     }
 
     public function edit()
     {
         $rules = [
-            'asal' => [
+            'nama' => [
                 'rules' => 'required|max_length[255]',
                 'errors' => [
-                    'required' => 'Asal harus diisi',
-                    'max_length' => 'Kolom asal tidak boleh lebih dari 20 karakter'
+                    'required' => 'Nama harus diisi',
+                    'max_length' => 'Kolom nama tidak boleh lebih dari 255 karakter'
                 ]
             ],
-            'tujuan' => [
+            'kapasitas' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kapasitas harus diisi',
+                    'max_length' => 'Kolom kapasitas tidak boleh lebih dari 255 karakter'
+                ]
+            ],
+            'pemilik' => [
                 'rules' => 'required|max_length[255]',
                 'errors' => [
-                    'required' => 'Tujuan harus diisi',
-                    'max_length' => 'Kolom tujuan tidak boleh lebih dari 255 karakter'
+                    'required' => 'Pemilik harus diisi',
+                    'max_length' => 'Kolom pemilik tidak boleh lebih dari 255 karakter'
+                ]
+            ],
+            'keterangan' => [
+                'rules' => 'required|max_length[255]',
+                'errors' => [
+                    'required' => 'Keterangan harus diisi',
+                    'max_length' => 'Kolom keterangan tidak boleh lebih dari 255 karakter'
                 ]
             ]
         ];
@@ -80,17 +120,21 @@ class AdminKapalController extends BaseController
         if ($this->validate($rules)) {
             $model = new AdminKapal();
             $data = array(
-                'ruteAsal' => $this->request->getPost('asal'),
-                'ruteTujuan' => $this->request->getPost('tujuan'),
-                'ruteUpdatedAt' => date('Y-m-d H:i:s'),
+                'kapalNama' => $this->request->getPost('nama'),
+                'kapalKategori' => $this->request->getPost('kategori'),
+                'kapalKapasitas' => $this->request->getPost('kapasitas'),
+                'kapalPemilik' => $this->request->getPost('pemilik'),
+                'kapalFoto' => 'default.png',
+                'kapalKeterangan' => $this->request->getPost('keterangan'),
+                'kapalUpdatedAt' => date('Y-m-d H:i:s'),
             );
             $model->updateData($data, $id);
             session()->setFlashdata('success', 'Berhasil edit data');
-            return redirect()->to('/admin/rute');
+            return redirect()->to('/admin/kapal');
         } else {
             session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
             $validation = \Config\Services::validation();
-            return redirect()->to('/admin/rute')->withInput()->with('validation', $validation);
+            return redirect()->to('/admin/kapal')->withInput()->with('validation', $validation);
         }
     }
 
@@ -100,7 +144,7 @@ class AdminKapalController extends BaseController
         $id = $this->request->getPost('id');
         $model->deleteData($id);
         session()->setFlashdata('success', 'Berhasil menghapus data');
-        return redirect()->to('/admin/rute');
+        return redirect()->to('/admin/kapal');
     }
 
     public function laporan()
