@@ -102,8 +102,8 @@
                         <i class="fa fa-file-invoice icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Tambah Pemesanan Tiket
-                        <div class="page-title-subheading">This is a page for managing tambah pemesanan tiket.
+                    <div>Update Pemesanan Tiket
+                        <div class="page-title-subheading">This is a page for managing update pemesanan tiket.
                         </div>
                     </div>
                 </div>
@@ -178,38 +178,41 @@
             <div class="app-main__inner">
                 <div class="box-body">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Invoice</label>
-                                    <input type="text" readonly id="invoice" name="invoice" value="<?= $kode; ?>" class="form-control invoice <?= ($validation->hasError('invoice')) ? 'is-invalid' : ''; ?>">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('invoice'); ?>
+                        <?php
+                        foreach ($pemesanan as $row) : ?>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Invoice</label>
+                                        <input type="text" readonly id="invoice" name="invoice" value="<?= $kode; ?>" class="form-control invoice <?= ($validation->hasError('invoice')) ? 'is-invalid' : ''; ?>">
+                                        <div class="invalid-feedback">
+                                            <?= $validation->getError('invoice'); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Tanggal</label>
+                                        <input type="date" id="tanggalpemesanan" value="<?= $row['pemesananTanggal']; ?>" name="tanggalpemesanan" class="form-control tanggalpemesanan <?= ($validation->hasError('tanggalpemesanan')) ? 'is-invalid' : ''; ?>">
+                                        <div class="invalid-feedback">
+                                            <?= $validation->getError('tanggalpemesanan'); ?>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Tanggal</label>
-                                    <input type="date" id="tanggalpemesanan" name="tanggalpemesanan" class="form-control tanggalpemesanan <?= ($validation->hasError('tanggalpemesanan')) ? 'is-invalid' : ''; ?>">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('tanggalpemesanan'); ?>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>Penumpang</label>
+                                    <div class="input-group">
+                                        <input type="hidden" name="idpenumpang" value="<?= $row['pemesananPenumpang']; ?>" id="idpenumpang" class="form-control idpenumpang">
+                                        <input type="text" class="form-control namapenumpang" value="<?= $row['penumpangNama']; ?>" readonly name="namapenumpang" id="namapenumpang">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" data-toggle="modal" data-target="#cariPenumpang">Cari</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <label>Penumpang</label>
-                                <div class="input-group">
-                                    <input type="hidden" name="idpenumpang" id="idpenumpang" class="form-control idpenumpang">
-                                    <input type="text" class="form-control namapenumpang" readonly name="namapenumpang" id="namapenumpang">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" data-toggle="modal" data-target="#cariPenumpang">Cari</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                         <br>
                         <hr>
                         <div class="row">
@@ -301,18 +304,21 @@
                             </div>
                         </div>
                         <br><br>
-                        <div class="row justify-content-end">
-                            <div class="col-lg-4">
-                                <label for="">Total Item :</label>
-                                <input type="text" readonly class="form-control totalitem"></input>
+                        <?php
+                        foreach ($pemesanan as $row) : ?>
+                            <div class="row justify-content-end">
+                                <div class="col-lg-4">
+                                    <label for="">Total Item :</label>
+                                    <input type="text" value="<?= $row['pemesananTotalTiket']; ?>" readonly class="form-control totalitem"></input>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="col-lg-4">
-                                <label for="">Total Bayar :</label>
-                                <input type="text" readonly class="form-control totalbayar"></input>
+                            <div class="row justify-content-end">
+                                <div class="col-lg-4">
+                                    <label for="">Total Bayar :</label>
+                                    <input type="text" value="<?= $row['pemesananTotalHarga']; ?>" readonly class="form-control totalbayar"></input>
+                                </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
                         <br>
                         <div class="row justify-content-end">
                             <div class="col-lg-4">
@@ -320,7 +326,7 @@
                                     Kembali
                                 </a>
                                 <button class="btn btn-primary btn-sm" onclick="simpanTransaksi()">
-                                    Simpan & Cetak Tiket
+                                    Update & Cetak Tiket
                                 </button>
                             </div>
                         </div>
@@ -479,8 +485,8 @@
 </script>
 
 <script>
-    let totalharga = 0;
-    let qty = 0;
+    let totalharga = $('.totalbayar').val();
+    let qty = $('.totalitem').val();
 
     function onlyNumber(event) {
         var angka = (event.which) ? event.which : event.keyCode
@@ -600,7 +606,7 @@
             alert('Tanggal tidak boleh kosong')
         } else {
             $.ajax({
-                url: "<?= base_url('admin/pemesanan/savetransaction'); ?>",
+                url: "<?= base_url('admin/pemesanan/edittransaction'); ?>",
                 type: "POST",
                 data: {
                     invoice: invoice,

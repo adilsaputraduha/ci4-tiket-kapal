@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>Laporan Data User</title>
-    <link rel="shortcut icon" href="<?= base_url(); ?>/assets/images/logo.png">
+    <title>Tiket Pemesanan</title>
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/auth/logo.png">
     <style type="text/css">
         .head {
             border-style: double;
@@ -37,7 +37,7 @@
     <center>
         <table class="head" width="625">
             <tr>
-                <td><img src="<?= base_url(); ?>/assets/images/logo.png" width="90" height="90"></td>
+                <td><img src="{{ asset('assets') }}/images/auth/logo.png" width="90" height="90"></td>
                 <td>
                     <center>
                         <!-- <font size="4">TOKO 73</font><br> -->
@@ -60,48 +60,57 @@
         </table>
         <table class="head" style="margin-bottom: 20px;">
             <tr>
-                <td>Laporan Data User</td>
+                <td>Tiket Pemesanan</td>
             </tr>
         </table>
-        <table border="1" class="body" width="625">
+        <table class="head" style="margin-bottom: 20px;">
+            <?php $no = 0;
+            foreach ($pemesanan as $row) : $no++ ?>
+                <tr>
+                    <td width="10%">Invoice</td>
+                    <td width="20%"><strong><?= $invoice; ?></strong></td>
+                    <td width="10%">Penumpang</td>
+                    <td width="20%"><strong><?= $row['penumpangNama']; ?></strong></td>
+                </tr>
+                <tr>
+                    <td>Tanggal</td>
+                    <td><strong><?= $row['pemesananTanggal']; ?></strong></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        <table border="1" class="body" width="700">
             <thead>
                 <tr style="height: 25px;">
                     <th>No.</th>
-                    <th>Email</th>
-                    <th>Nama</th>
-                    <th>Level</th>
+                    <th>Rute</th>
+                    <th>Kapal</th>
+                    <th>Harga</th>
+                    <th>Qty</th>
+                    <th>Jumlah</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 0;
-                foreach ($user as $row) : $no++ ?>
+                foreach ($detail as $row) : $no++ ?>
                     <tr style="height: 20px; text-align: center;">
                         <td> <?= $no; ?></td>
-                        <td> <?= $row['userEmail']; ?></td>
-                        <td> <?= $row['userNama']; ?></td>
-                        <td>
-                            <?php if ($row['userRole'] == 1) { ?>
-                                Admin
-                            <?php } else if ($row['userRole'] == 0) { ?>
-                                SuperAdmin
-                            <?php } else if ($row['userRole'] == 2) { ?>
-                                Pimpinan
-                            <?php } ?>
-                        </td>
+                        <td> <?= $row['ruteAsal']; ?> - <?= $row['ruteTujuan']; ?></td>
+                        <td> <?= $row['kapalNama']; ?></td>
+                        <td> Rp. <?= $row['jadwalHarga']; ?></td>
+                        <td> <?= $row['detailQty']; ?></td>
+                        <td> Rp. <?= $row['detailHarga']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+
+                <?php $no = 0;
+                foreach ($pemesanan as $row) : $no++ ?>
+                    <tr style="height: 20px; text-align: center;">
+                        <td colspan="4">Total</td>
+                        <td> <?= $row['pemesananTotalTiket']; ?></td>
+                        <td> Rp. <?= $row['pemesananTotalHarga']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
-        </table>
-        <table width="625" style="margin-top: 30px;">
-            <tr style="text-align: right !important;">
-                <td>Kepulauan Mentawai, <?= date("d M Y"); ?></td>
-            </tr>
-            <tr style="text-align: right !important;">
-                <td>Pimpinan Pelabuhan</td>
-            </tr>
-            <tr style="text-align: right !important; height: 120px;">
-                <td>(................................................)</td>
-            </tr>
         </table>
     </center>
 </body>

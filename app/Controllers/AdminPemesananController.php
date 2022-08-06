@@ -20,112 +20,38 @@ class AdminPemesananController extends BaseController
 
     public function add()
     {
-        // Nomor otomatis
-        $db = \Config\Database::connect();
-        $query = $db->query("SELECT max(pemesananInvoice) as biggerCode FROM tb_pemesanan");
-        $row = $query->getRowArray();
-        $kodeTerbesar = $row['biggerCode'];
-        $urutan = (int) substr($kodeTerbesar, 3, 1);
-        $urutan++;
-        $huruf = "INV-";
-        $date = date('YmdH');
-        $kodeInvoice = $huruf .  $date . sprintf("%03s", $urutan);
+        $generateRandom = rand(1000, 9999);
+        $generateDate = date('Ymd');
+        $generateInvoice = 'INV-' . $generateDate . "-" . $generateRandom;
 
         $model = new AdminPemesanan();
         $modelsatu = new AdminPenumpang();
         $modeldua = new AdminJadwal();
+
         $data = [
-            'pemesanan' => $model->getData()->getResultArray(),
+            'detail' => $model->getDataDetail($generateInvoice)->getresultArray(),
             'penumpang' => $modelsatu->getData()->getResultArray(),
             'jadwal' => $modeldua->getData()->getResultArray(),
             'validation' => \Config\Services::validation(),
-            'kode' => $kodeInvoice
+            'kode' => $generateInvoice
         ];
         echo view('/admin/view_tambah_pemesanan', $data);
     }
 
-    public function save()
-    {
-        $rules = [
-            'asal' => [
-                'rules' => 'required|max_length[255]',
-                'errors' => [
-                    'required' => 'Asal harus diisi',
-                    'max_length' => 'Kolom asal tidak boleh lebih dari 20 karakter'
-                ]
-            ],
-            'tujuan' => [
-                'rules' => 'required|max_length[255]',
-                'errors' => [
-                    'required' => 'Tujuan harus diisi',
-                    'max_length' => 'Kolom tujuan tidak boleh lebih dari 255 karakter'
-                ]
-            ]
-        ];
-
-        if ($this->validate($rules)) {
-            $model = new AdminPemesanan();
-            $data = array(
-                'ruteAsal' => $this->request->getPost('asal'),
-                'ruteTujuan' => $this->request->getPost('tujuan'),
-                'ruteUpdatedAt' => date('Y-m-d H:i:s'),
-                'ruteCreatedAt' => date('Y-m-d H:i:s')
-            );
-            $model->saveData($data);
-            session()->setFlashdata('success', 'Berhasil menyimpan data');
-            return redirect()->to('/admin/rute');
-        } else {
-            session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
-            $validation = \Config\Services::validation();
-            return redirect()->to('/admin/rute')->withInput()->with('validation', $validation);
-        }
-    }
-
-    public function edit()
-    {
-        $rules = [
-            'asal' => [
-                'rules' => 'required|max_length[255]',
-                'errors' => [
-                    'required' => 'Asal harus diisi',
-                    'max_length' => 'Kolom asal tidak boleh lebih dari 20 karakter'
-                ]
-            ],
-            'tujuan' => [
-                'rules' => 'required|max_length[255]',
-                'errors' => [
-                    'required' => 'Tujuan harus diisi',
-                    'max_length' => 'Kolom tujuan tidak boleh lebih dari 255 karakter'
-                ]
-            ]
-        ];
-
-        $id = $this->request->getPost('id');
-
-        if ($this->validate($rules)) {
-            $model = new AdminPemesanan();
-            $data = array(
-                'ruteAsal' => $this->request->getPost('asal'),
-                'ruteTujuan' => $this->request->getPost('tujuan'),
-                'ruteUpdatedAt' => date('Y-m-d H:i:s'),
-            );
-            $model->updateData($data, $id);
-            session()->setFlashdata('success', 'Berhasil edit data');
-            return redirect()->to('/admin/rute');
-        } else {
-            session()->setFlashdata('failed', 'Gagal menyimpan, ada kesalahan pada inputan anda' . $this->validator->listErrors());
-            $validation = \Config\Services::validation();
-            return redirect()->to('/admin/rute')->withInput()->with('validation', $validation);
-        }
-    }
-
-    public function delete()
+    public function update($id)
     {
         $model = new AdminPemesanan();
-        $id = $this->request->getPost('id');
-        $model->deleteData($id);
-        session()->setFlashdata('success', 'Berhasil menghapus data');
-        return redirect()->to('/admin/rute');
+        $modelsatu = new AdminPenumpang();
+        $modeldua = new AdminJadwal();
+        $data = [
+            'pemesanan' => $model->getInvoiceDetail($id)->getresultArray(),
+            'detail' => $model->getDataDetail($id)->getresultArray(),
+            'penumpang' => $modelsatu->getData()->getResultArray(),
+            'jadwal' => $modeldua->getData()->getResultArray(),
+            'validation' => \Config\Services::validation(),
+            'kode' => $id
+        ];
+        echo view('/admin/view_update_pemesanan', $data);
     }
 
     public function laporan()
@@ -133,5 +59,75 @@ class AdminPemesananController extends BaseController
         $model = new AdminPemesanan();
         $data['rute'] = $model->getData()->getResultArray();
         echo view('/admin/report_rute', $data);
+    }
+
+    public function apiindex()
+    {
+        $id = $this->request->getPost('invoice');
+
+        $model = new AdminPemesanan();
+        $data = [
+            'detail' => $model->getDataDetail($id)->getresultArray()
+        ];
+        echo view('/admin/table_pemesanan', $data);
+    }
+
+    public function apisave()
+    {
+        $model = new AdminPemesanan();
+        $data = array(
+            'detailPemesananInvoice' => $this->request->getPost('invoice'),
+            'detailJadwal' => $this->request->getPost('jadwal'),
+            'detailQty' => $this->request->getPost('jumlah'),
+            'detailHarga' => $this->request->getPost('total'),
+        );
+        $model->saveDetail($data);
+    }
+
+    public function apidelete()
+    {
+        $model = new AdminPemesanan();
+        $id = $this->request->getPost('detailid');
+        $model->deleteDetail($id);
+    }
+
+    public function savetransaction()
+    {
+        $model = new AdminPemesanan();
+        $data = array(
+            'pemesananInvoice' => $this->request->getPost('invoice'),
+            'pemesananTanggal' => $this->request->getPost('tanggal'),
+            'pemesananPenumpang' => $this->request->getPost('penumpang'),
+            'pemesananTotalTiket' => $this->request->getPost('totalitem'),
+            'pemesananTotalHarga' => $this->request->getPost('totalbayar'),
+        );
+        $model->saveTransaction($data);
+    }
+
+    public function edittransaction()
+    {
+        $id = $this->request->getPost('invoice');
+
+        $model = new AdminPemesanan();
+        $data = array(
+            'pemesananTanggal' => $this->request->getPost('tanggal'),
+            'pemesananPenumpang' => $this->request->getPost('penumpang'),
+            'pemesananTotalTiket' => $this->request->getPost('totalitem'),
+            'pemesananTotalHarga' => $this->request->getPost('totalbayar'),
+        );
+        $model->updateData($data, $id);
+    }
+
+    public function invoice($id)
+    {
+        $model = new AdminPemesanan();
+
+        $data = [
+            'pemesanan' => $model->getInvoiceDetail($id)->getresultArray(),
+            'detail' => $model->getDataDetail($id)->getresultArray(),
+            'invoice' => $id
+        ];
+
+        return view('/admin/report_tiket', $data);
     }
 }

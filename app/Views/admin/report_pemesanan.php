@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Laporan Data User</title>
+    <title>Laporan Data Pemesanan</title>
     <link rel="shortcut icon" href="<?= base_url(); ?>/assets/images/logo.png">
     <style type="text/css">
         .head {
@@ -54,40 +54,42 @@
             </tr>
             <table width="625" class="head">
                 <tr>
-                    <td class="text2">Kepulauan Mentawai, <?= date("d M Y"); ?></td>
+                    <td class="text2">Padang, <?= date("d M Y"); ?></td>
                 </tr>
             </table>
         </table>
         <table class="head" style="margin-bottom: 20px;">
             <tr>
-                <td>Laporan Data User</td>
+                <td>Laporan Data Pemesanan</td>
+            </tr>
+        </table>
+        <table class="head" style="margin-bottom: 20px; text-align: center;">
+            <tr>
+                <td width="130px">Tanggal Awal</td>
+                <td><strong><?= $tanggalawal; ?></strong></td>
+                <td width="130px">Tanggal Akhir</td>
+                <td><strong><?= $tanggalakhir; ?></strong></td>
             </tr>
         </table>
         <table border="1" class="body" width="625">
             <thead>
                 <tr style="height: 25px;">
-                    <th>No.</th>
-                    <th>Email</th>
-                    <th>Nama</th>
-                    <th>Level</th>
+                    <th>Invoice</th>
+                    <th>Tanggal</th>
+                    <th>Penumpang</th>
+                    <th>Total Tiket</th>
+                    <th>Total Harga</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 0;
-                foreach ($user as $row) : $no++ ?>
+                foreach ($pemesanan as $row) : $no++ ?>
                     <tr style="height: 20px; text-align: center;">
-                        <td> <?= $no; ?></td>
-                        <td> <?= $row['userEmail']; ?></td>
-                        <td> <?= $row['userNama']; ?></td>
-                        <td>
-                            <?php if ($row['userRole'] == 1) { ?>
-                                Admin
-                            <?php } else if ($row['userRole'] == 0) { ?>
-                                SuperAdmin
-                            <?php } else if ($row['userRole'] == 2) { ?>
-                                Pimpinan
-                            <?php } ?>
-                        </td>
+                        <td> <?= $row['pemesananInvoice']; ?></td>
+                        <td> <?= $row['pemesananTanggal']; ?></td>
+                        <td> <?= $row['penumpangNama']; ?></td>
+                        <td> <?= $row['pemesananTotalTiket']; ?></td>
+                        <td> <?= $row['pemesananTotalHarga']; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -92,6 +92,17 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <table width="625" style="margin-top: 30px;">
+            <tr style="text-align: right !important;">
+                <td>Kepulauan Mentawai, <?= date("d M Y"); ?></td>
+            </tr>
+            <tr style="text-align: right !important;">
+                <td>Pimpinan Pelabuhan</td>
+            </tr>
+            <tr style="text-align: right !important; height: 120px;">
+                <td>(................................................)</td>
+            </tr>
+        </table>
     </center>
 </body>
 

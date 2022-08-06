@@ -7,7 +7,7 @@
         <ul class="vertical-nav-menu">
             <li class="app-sidebar__heading"></li>
             <li>
-                <a href="<?= base_url('/admin'); ?>" class="mm-active">
+                <a href="<?= base_url('/admin'); ?>">
                     <i class="metismenu-icon pe-7s-rocket"></i>
                     Dashboard
                 </a>
@@ -21,7 +21,7 @@
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                     <ul>
-                        <?php if (session()->get('userLevel') == 0) { ?>
+                        <?php if (session()->get('userRole') == 0) { ?>
                             <li>
                                 <a href="<?= base_url('/admin/user'); ?>">
                                     <i class="metismenu-icon"></i>
@@ -78,8 +78,8 @@
                 </li>
             <?php } ?>
             <?php if (session()->get('userRole') == 2 || session()->get('userRole') == 0) { ?>
-                <li>
-                    <a href="<?= base_url('/admin/report') ?>">
+                <li class="mm-active">
+                    <a href="<?= base_url('/admin/report') ?>" class="mm-active">
                         <i class="metismenu-icon pe-7s-display2"></i>
                         Report
                     </a>
@@ -99,11 +99,11 @@
             <div class="page-title-wrapper">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <i class="pe-7s-car icon-gradient bg-mean-fruit">
+                        <i class="fa fa-file icon-gradient bg-mean-fruit">
                         </i>
                     </div>
-                    <div>Dashboard
-                        <div class="page-title-subheading">This is a dashboard pages.
+                    <div>Data Report
+                        <div class="page-title-subheading">This is a page for managing report data.
                         </div>
                     </div>
                 </div>
@@ -159,88 +159,47 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-xl-4">
-                <div class="card mb-3 widget-content bg-midnight-bloom">
-                    <div class="widget-content-wrapper text-white">
-                        <div class="widget-content-left">
-                            <div class="widget-heading">Total Pemesanan</div>
-                            <div class="widget-subheading">Total Orders</div>
-                        </div>
-                        <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span><?= $pemesanan ?></span></div>
-                        </div>
-                    </div>
+        <div class="card">
+            <?php if (session()->getFlashdata('success')) { ?>
+                <div class="alert alert-success icons-alert m-2">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?php echo session()->getFlashdata('success'); ?>
                 </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="card mb-3 widget-content bg-arielle-smile">
-                    <div class="widget-content-wrapper text-white">
-                        <div class="widget-content-left">
-                            <div class="widget-heading">Total Penumpang</div>
-                            <div class="widget-subheading">Total Clients</div>
-                        </div>
-                        <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span><?= $penumpang ?></span></div>
-                        </div>
-                    </div>
+            <?php } else if (session()->getFlashdata('failed')) { ?>
+                <div class="alert alert-danger icons-alert m-2">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?php echo session()->getFlashdata('failed'); ?>
                 </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="card mb-3 widget-content bg-grow-early">
-                    <div class="widget-content-wrapper text-white">
-                        <div class="widget-content-left">
-                            <div class="widget-heading">Total Kapal</div>
-                            <div class="widget-subheading">Total Ships</div>
-                        </div>
-                        <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span><?= $kapal ?></span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-xl-4">
-                <div class="card mb-3 widget-content">
-                    <div class="widget-content-outer">
-                        <div class="widget-content-wrapper">
-                            <div class="widget-content-left">
-                                <div class="widget-heading">Total Rute</div>
-                                <div class="widget-subheading">Total Rutes</div>
-                            </div>
-                            <div class="widget-content-right">
-                                <div class="widget-numbers text-success"><?= $rute ?></div>
+            <?php } ?>
+            <div class="app-main__inner">
+                <div class="box-body">
+                    <div class="container">
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <h6>Fitler Laporan Pemesanan</h6>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="card mb-3 widget-content">
-                    <div class="widget-content-outer">
-                        <div class="widget-content-wrapper">
-                            <div class="widget-content-left">
-                                <div class="widget-heading">Total Jadwal</div>
-                                <div class="widget-subheading">Total Schedule</div>
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tanggal Awal</label>
+                                    <input type="date" class="form-control tanggalawalpemesanan" id="tanggalawalpemesanan" name="tanggalawalpemesanan" required>
+                                </div>
                             </div>
-                            <div class="widget-content-right">
-                                <div class="widget-numbers text-warning"><?= $jadwal ?></div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tanggal Akhir</label>
+                                    <input type="date" class="form-control tanggalakhirpemesanan" id="tanggalakhirpemesanan" name="tanggalakhirpemesanan" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-4">
-                <div class="card mb-3 widget-content">
-                    <div class="widget-content-outer">
-                        <div class="widget-content-wrapper">
-                            <div class="widget-content-left">
-                                <div class="widget-heading">Total User</div>
-                                <div class="widget-subheading">Total Users</div>
-                            </div>
-                            <div class="widget-content-right">
-                                <div class="widget-numbers text-danger"><?= $user ?></div>
+                        <div class="row mb-5">
+                            <div class="col-sm-6">
+                                <button onclick="cetakLaporanPemesanan()" class="btn btn-success">Cetak</button>
                             </div>
                         </div>
                     </div>
@@ -249,5 +208,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    function cetakLaporanPemesanan() {
+        let tanggalawalpemesanan = $('.tanggalawalpemesanan').val()
+        let tanggalakhirpemesanan = $('.tanggalakhirpemesanan').val()
+
+        if (tanggalawalpemesanan.length == 0) {
+            alert('Tanggal awal tidak boleh kosong')
+        } else if (tanggalakhirpemesanan.length == 0) {
+            alert('Tanggal akhir tidak boleh kosong')
+        } else {
+            window.open("/admin/report/pemesanan/" + tanggalawalpemesanan + "/" + tanggalakhirpemesanan, "_blank");
+        }
+    }
+</script>
 
 <?= $this->endSection(); ?>

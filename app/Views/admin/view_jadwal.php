@@ -13,205 +13,78 @@
                 </a>
             </li>
             <li class="app-sidebar__heading">Administrator</li>
-            <li class="mm-active">
-                <a href="#">
-                    <i class="metismenu-icon pe-7s-diamond"></i>
-                    Masters
-                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                </a>
-                <ul class="mm-show">
-                    <li>
-                        <a href="<?= base_url('/admin/user'); ?>">
-                            <i class="metismenu-icon"></i>
-                            User
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('/admin/penumpang'); ?>">
-                            <i class="metismenu-icon">
-                            </i>Penumpang
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('/admin/kategori'); ?>">
-                            <i class="metismenu-icon">
-                            </i>Kategori
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('/admin/rute'); ?>">
-                            <i class="metismenu-icon">
-                            </i>Rute
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('/admin/kapal'); ?>">
-                            <i class="metismenu-icon">
-                            </i>Kapal
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?= base_url('/admin/jadwal'); ?>" class="mm-active">
-                            <i class="metismenu-icon">
-                            </i>Jadwal
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="metismenu-icon pe-7s-car"></i>
-                    Transactions
-                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                </a>
-                <ul>
-                    <li>
-                        <a href="<?= base_url('/admin/pemesanan'); ?>">
-                            <i class="metismenu-icon">
-                            </i>Pemesanan Tiket
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="metismenu-icon pe-7s-car"></i>
-                    Reports
-                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                </a>
-                <ul>
-                    <li>
-                        <a href="components-tabs.html">
-                            <i class="metismenu-icon">
-                            </i>Tabs
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-accordions.html">
-                            <i class="metismenu-icon">
-                            </i>Accordions
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-notifications.html">
-                            <i class="metismenu-icon">
-                            </i>Notifications
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-modals.html">
-                            <i class="metismenu-icon">
-                            </i>Modals
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-progress-bar.html">
-                            <i class="metismenu-icon">
-                            </i>Progress Bar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-tooltips-popovers.html">
-                            <i class="metismenu-icon">
-                            </i>Tooltips &amp; Popovers
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-carousel.html">
-                            <i class="metismenu-icon">
-                            </i>Carousel
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-calendar.html">
-                            <i class="metismenu-icon">
-                            </i>Calendar
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-pagination.html">
-                            <i class="metismenu-icon">
-                            </i>Pagination
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-scrollable-elements.html">
-                            <i class="metismenu-icon">
-                            </i>Scrollable
-                        </a>
-                    </li>
-                    <li>
-                        <a href="components-maps.html">
-                            <i class="metismenu-icon">
-                            </i>Maps
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="app-sidebar__heading">Settings</li>
-            <li>
-                <a href="#">
-                    <i class="metismenu-icon pe-7s-diamond"></i>
-                    Landing Page
-                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                </a>
-                <ul>
-                    <li>
-                        <a href="elements-buttons-standard.html">
-                            <i class="metismenu-icon"></i>
-                            Buttons
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-dropdowns.html">
-                            <i class="metismenu-icon">
-                            </i>Dropdowns
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-icons.html">
-                            <i class="metismenu-icon">
-                            </i>Icons
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-badges-labels.html">
-                            <i class="metismenu-icon">
-                            </i>Badges
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-cards.html">
-                            <i class="metismenu-icon">
-                            </i>Cards
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-list-group.html">
-                            <i class="metismenu-icon">
-                            </i>List Groups
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-navigation.html">
-                            <i class="metismenu-icon">
-                            </i>Navigation Menus
-                        </a>
-                    </li>
-                    <li>
-                        <a href="elements-utilities.html">
-                            <i class="metismenu-icon">
-                            </i>Utilities
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="dashboard-boxes.html">
-                    <i class="metismenu-icon pe-7s-display2"></i>
-                    Dashboard Boxes
-                </a>
-            </li>
+            <?php if (session()->get('userRole') == 1 || session()->get('userRole') == 0) { ?>
+                <li class="mm-active">
+                    <a href="#">
+                        <i class="metismenu-icon pe-7s-diamond"></i>
+                        Masters
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                    <ul class="mm-show">
+                        <?php if (session()->get('userRole') == 0) { ?>
+                            <li>
+                                <a href="<?= base_url('/admin/user'); ?>">
+                                    <i class="metismenu-icon"></i>
+                                    User
+                                </a>
+                            </li>
+                        <?php } ?>
+                        <li>
+                            <a href="<?= base_url('/admin/penumpang'); ?>">
+                                <i class="metismenu-icon">
+                                </i>Penumpang
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('/admin/kategori'); ?>">
+                                <i class="metismenu-icon">
+                                </i>Kategori
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('/admin/rute'); ?>">
+                                <i class="metismenu-icon">
+                                </i>Rute
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('/admin/kapal'); ?>">
+                                <i class="metismenu-icon">
+                                </i>Kapal
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url('/admin/jadwal'); ?>" class="mm-active">
+                                <i class="metismenu-icon">
+                                </i>Jadwal
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="metismenu-icon pe-7s-car"></i>
+                        Transactions
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="<?= base_url('/admin/pemesanan'); ?>">
+                                <i class="metismenu-icon">
+                                </i>Pemesanan Tiket
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <?php } ?>
+            <?php if (session()->get('userRole') == 2 || session()->get('userRole') == 0) { ?>
+                <li>
+                    <a href="<?= base_url('/admin/report') ?>">
+                        <i class="metismenu-icon pe-7s-display2"></i>
+                        Report
+                    </a>
+                </li>
+            <?php } ?>
         </ul>
     </div>
 </div>
@@ -325,8 +198,7 @@
                                     <th>Rute</th>
                                     <th>Jadwal</th>
                                     <th>Keterangan</th>
-                                    <th>Harga Dewasa</th>
-                                    <th>Harga Anak</th>
+                                    <th>Harga</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -338,8 +210,7 @@
                                         <td> <?= $row['ruteAsal']; ?> - <?= $row['ruteTujuan']; ?></td>
                                         <td> <?= $row['jadwalTanggal']; ?> - <?= $row['jadwalJam']; ?></td>
                                         <td> <?= $row['jadwalKeterangan']; ?></td>
-                                        <td>Rp. <?= $row['jadwalHargaDewasa']; ?></td>
-                                        <td>Rp. <?= $row['jadwalHargaAnak']; ?></td>
+                                        <td>Rp. <?= $row['jadwalHarga']; ?></td>
                                         <td style="text-align: center;">
                                             <a href="#" data-toggle="modal" data-target="#editModal<?= $row['jadwalId']; ?>" class="btn-transition btn btn-outline-primary btn-update">
                                                 <i class="fa fa-edit"></i>
@@ -427,21 +298,12 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <label>Harga Dewasa</label>
+                                <label>Harga</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp.</span>
                                     </div>
-                                    <input type="text" class="form-control" name="hargadewasa" placeholder="0" onkeypress="return onlyNumber(event)">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <label>Harga Anak-Anak</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="text" class="form-control" name="hargaanak" placeholder="0" onkeypress="return onlyNumber(event)">
+                                    <input type="text" class="form-control" name="harga" placeholder="0" onkeypress="return onlyNumber(event)">
                                 </div>
                             </div>
                         </div>
@@ -546,16 +408,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp.</span>
                                     </div>
-                                    <input type="text" class="form-control" value="<?= $row['jadwalHargaDewasa']; ?>" name="hargadewasa" placeholder="0" onkeypress="return onlyNumber(event)">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <label>Harga Anak-Anak</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Rp.</span>
-                                    </div>
-                                    <input type="text" class="form-control" value="<?= $row['jadwalHargaAnak']; ?>" name="hargaanak" placeholder="0" onkeypress="return onlyNumber(event)">
+                                    <input type="text" class="form-control" value="<?= $row['jadwalHarga']; ?>" name="harga" placeholder="0" onkeypress="return onlyNumber(event)">
                                 </div>
                             </div>
                         </div>

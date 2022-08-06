@@ -85,10 +85,17 @@ $routes->get('/admin/jadwal/laporan', 'AdminJadwalController::laporan', ['filter
 // Pemesanan
 $routes->get('/admin/pemesanan', 'AdminPemesananController::index', ['filter' => 'auth']);
 $routes->get('/admin/pemesanan/tambah', 'AdminPemesananController::add', ['filter' => 'auth']);
-$routes->post('/admin/pemesanan/save', 'AdminPemesananController::save', ['filter' => 'auth']);
-$routes->post('/admin/pemesanan/edit', 'AdminPemesananController::edit', ['filter' => 'auth']);
-$routes->post('/admin/pemesanan/delete', 'AdminPemesananController::delete', ['filter' => 'auth']);
+$routes->get('/admin/pemesanan/update/(:segment)', 'AdminPemesananController::update/$1', ['filter' => 'auth']);
+$routes->post('/admin/pemesanan/apiindex', 'AdminPemesananController::apiindex', ['filter' => 'auth']);
+$routes->post('/admin/pemesanan/apisave', 'AdminPemesananController::apisave', ['filter' => 'auth']);
+$routes->post('/admin/pemesanan/apidelete', 'AdminPemesananController::apidelete', ['filter' => 'auth']);
+$routes->post('/admin/pemesanan/savetransaction', 'AdminPemesananController::savetransaction', ['filter' => 'auth']);
+$routes->post('/admin/pemesanan/edittransaction', 'AdminPemesananController::edittransaction', ['filter' => 'auth']);
+$routes->get('/admin/pemesanan/invoice/(:segment)', 'AdminPemesananController::invoice/$1', ['filter' => 'auth']);
 $routes->get('/admin/pemesanan/laporan', 'AdminPemesananController::laporan', ['filter' => 'auth']);
+// Report
+$routes->get('/admin/report', 'AdminReportController::index', ['filter' => 'auth']);
+$routes->get('/admin/report/pemesanan/(:segment)/(:segment)', 'AdminReportController::reportpemesanan/$1/$2', ['filter' => 'auth']);
 /*
  * --------------------------------------------------------------------
  * Additional Routing

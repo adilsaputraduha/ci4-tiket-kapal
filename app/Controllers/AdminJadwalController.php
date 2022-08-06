@@ -37,16 +37,10 @@ class AdminJadwalController extends BaseController
                     'required' => 'Jam harus diisi',
                 ]
             ],
-            'hargadewasa' => [
+            'harga' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Harga Dewasa harus diisi',
-                ]
-            ],
-            'hargaanak' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Harga Anak harus diisi',
                 ]
             ],
             'keterangan' => [
@@ -65,8 +59,7 @@ class AdminJadwalController extends BaseController
                 'jadwalTanggal' => $this->request->getPost('tanggal'),
                 'jadwalJam' => $this->request->getPost('jam'),
                 'jadwalKeterangan' => $this->request->getPost('keterangan'),
-                'jadwalHargaDewasa' => $this->request->getPost('hargadewasa'),
-                'jadwalHargaAnak' => $this->request->getPost('hargaanak'),
+                'jadwalHarga' => $this->request->getPost('harga'),
                 'jadwalUpdatedAt' => date('Y-m-d H:i:s'),
                 'jadwalCreatedAt' => date('Y-m-d H:i:s')
             );
@@ -95,16 +88,10 @@ class AdminJadwalController extends BaseController
                     'required' => 'Jam harus diisi',
                 ]
             ],
-            'hargadewasa' => [
+            'harga' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Harga Dewasa harus diisi',
-                ]
-            ],
-            'hargaanak' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Harga Anak harus diisi',
                 ]
             ],
             'keterangan' => [
@@ -125,8 +112,7 @@ class AdminJadwalController extends BaseController
                 'jadwalTanggal' => $this->request->getPost('tanggal'),
                 'jadwalJam' => $this->request->getPost('jam'),
                 'jadwalKeterangan' => $this->request->getPost('keterangan'),
-                'jadwalHargaDewasa' => $this->request->getPost('hargadewasa'),
-                'jadwalHargaAnak' => $this->request->getPost('hargaanak'),
+                'jadwalHarga' => $this->request->getPost('harga'),
                 'jadwalUpdatedAt' => date('Y-m-d H:i:s'),
             );
             $model->updateData($data, $id);

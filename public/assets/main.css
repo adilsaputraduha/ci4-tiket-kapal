@@ -9011,7 +9011,6 @@ button,
 .app-header__logo .logo-src {
     height: 23px;
     width: 97px;
-    background: url(assets/images/logo-inverse.png);
 }
 .app-header__menu,
 .app-header__mobile-menu {
@@ -9111,9 +9110,6 @@ button,
 .app-header.header-text-light .search-wrapper .input-holder .search-icon span::before {
     background: rgba(255, 255, 255, 0.8);
 }
-.app-header.header-text-light .app-header__logo .logo-src {
-    background: url(assets/images/logo.png);
-}
 .app-header.header-text-light .app-header__mobile-menu .hamburger-inner,
 .app-header.header-text-light .app-header__mobile-menu .hamburger-inner::before,
 .app-header.header-text-light .app-header__mobile-menu .hamburger-inner::after {
@@ -9188,9 +9184,6 @@ button,
 .app-header.header-text-dark .search-wrapper .close::after,
 .app-header.header-text-dark .search-wrapper .input-holder .search-icon span::before {
     background: rgba(0, 0, 0, 0.8);
-}
-.app-header.header-text-dark .app-header__logo .logo-src {
-    background: url(assets/images/logo-inverse.png);
 }
 .app-sidebar {
     width: 280px;
@@ -9421,9 +9414,6 @@ button,
 }
 .app-sidebar.sidebar-text-light .ps__rail-y:hover .ps__thumb-y {
     background: rgba(255, 255, 255, 0.2);
-}
-.app-sidebar.sidebar-text-light .app-header__logo .logo-src {
-    background: url(assets/images/logo.png);
 }
 .app-sidebar.sidebar-text-light .app-header__logo .hamburger-inner,
 .app-sidebar.sidebar-text-light .app-header__logo .hamburger-inner::before,
